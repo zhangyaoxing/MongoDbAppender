@@ -1,0 +1,10 @@
+obj
+bin
+*.user
+*.suo
+*.Cache
+_ReSharper*
+.gitconfig
+TestResults
+output
+packages
