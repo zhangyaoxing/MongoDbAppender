@@ -91,6 +91,31 @@ namespace MongoDbAppender
         public string ClassName { get; set; }
 
         /// <summary>
+        /// The exception.
+        /// </summary>
+        [BsonElement("exception")]
+        public ExceptionEntry Exception { get; set; }
+    }
+
+    /// <summary>
+    /// Exception
+    /// </summary>
+    [BsonIgnoreExtraElements(true)]
+    public class ExceptionEntry
+    {
+        /// <summary>
+        /// Name of the exception. 
+        /// </summary>
+        [BsonElement("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Error message.
+        /// </summary>
+        [BsonElement("message")]
+        public string Message { get; set; }
+
+        /// <summary>
         /// Data that attached to exception.
         /// Represents the Data property of Exception class.
         /// </summary>
@@ -98,46 +123,21 @@ namespace MongoDbAppender
         public IDictionary<string, object> Data { get; set; }
 
         /// <summary>
-        /// The exception.
+        /// Source.
         /// </summary>
-        [BsonElement("exception")]
-        public ExceptionEntry Exception { get; set; }
+        [BsonElement("source")]
+        public string Source { get; set; }
 
         /// <summary>
-        /// Exception
+        /// Stacktrace
         /// </summary>
-        [BsonIgnoreExtraElements(true)]
-        public class ExceptionEntry
-        {
-            /// <summary>
-            /// Name of the exception. 
-            /// </summary>
-            [BsonElement("name")]
-            public string Name { get; set; }
+        [BsonElement("stackTrace")]
+        public string StackTrace { get; set; }
 
-            /// <summary>
-            /// Error message.
-            /// </summary>
-            [BsonElement("message")]
-            public string Message { get; set; }
-
-            /// <summary>
-            /// Source.
-            /// </summary>
-            [BsonElement("source")]
-            public string Source { get; set; }
-
-            /// <summary>
-            /// Stacktrace
-            /// </summary>
-            [BsonElement("stackTrace")]
-            public string StackTrace { get; set; }
-
-            /// <summary>
-            /// Inner exception (if any, otherwise null).
-            /// </summary>
-            [BsonElement("innerException")]
-            public ExceptionEntry InnerException { get; set; }
-        }
+        /// <summary>
+        /// Inner exception (if any, otherwise null).
+        /// </summary>
+        [BsonElement("innerException")]
+        public ExceptionEntry InnerException { get; set; }
     }
 }
