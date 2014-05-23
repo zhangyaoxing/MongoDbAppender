@@ -6,7 +6,7 @@ using log4net.Appender;
 using MongoDB.Driver;
 using System.Configuration;
 
-namespace MongoDbAppender
+namespace Log4net.Appender.MongoDb
 {
     public class MongoDbAppender : BufferingAppenderSkeleton
     {
@@ -112,6 +112,11 @@ namespace MongoDbAppender
 
         protected override void SendBuffer(log4net.Core.LoggingEvent[] events)
         {
+            if (!this.isWorking)
+            {
+                return;
+            }
+
             try
             {
                 var server = this.client.GetServer();

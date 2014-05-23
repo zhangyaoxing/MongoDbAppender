@@ -5,7 +5,7 @@ using System.Text;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace MongoDbAppender
+namespace Log4net.Appender.MongoDb
 {
     /// <summary>
     /// Describes a log entity.
