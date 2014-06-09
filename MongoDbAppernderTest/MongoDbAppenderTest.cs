@@ -8,6 +8,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Log4net.Appender.MongoDb;
 using MongoDB.Driver.Builders;
+using log4net.Config;
 
 namespace MongoDbAppernderTest
 {
@@ -79,6 +80,7 @@ namespace MongoDbAppernderTest
         public void MongoDbAppenderConstructorTest()
         {
             InitTestDB();
+            XmlConfigurator.Configure();
             var log = LogManager.GetLogger(typeof(MongoDbAppenderTest));
             var random = new Random();
             var rNum = random.Next().ToString();
