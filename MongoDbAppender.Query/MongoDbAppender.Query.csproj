@@ -40,12 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\FilterResultDto.cs" />
     <Compile Include="Dto\LogLevel.cs" />
     <Compile Include="Dto\LogRepositoryDto.cs" />
     <Compile Include="Dto\StatisticsDto.cs" />
     <Compile Include="IDetail.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="IMonitor.cs" />
+    <Compile Include="IOverview.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
