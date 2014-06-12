@@ -12,6 +12,6 @@ namespace MongoDbAppender.Query.Dto
         Info = 3,
         Warn = 4,
         Error = 5,
-        Fatal = 6,
+        Fatal = 6
     }
 }
