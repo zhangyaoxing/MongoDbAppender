@@ -96,6 +96,7 @@ namespace MongoDbAppernderTest
         public void MongoDbAppenderStressTest()
         {
             InitTestDB();
+            XmlConfigurator.Configure();
             this.sem = new Semaphore(0, THREAD_COUNT);
             var start = DateTime.Now;
             for (var i = 0; i < THREAD_COUNT; i++)
