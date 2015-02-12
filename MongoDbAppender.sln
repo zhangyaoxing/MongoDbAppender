@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbAppender", "MongoDbAppender\MongoDbAppender.csproj", "{51DE12F3-72C6-4EE8-87EB-461FD2319ABB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbAppernderTest", "MongoDbAppernderTest\MongoDbAppernderTest.csproj", "{EB121FF2-8A78-46E9-B797-A851EA0FE635}"
@@ -16,10 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{E5FF50CC-8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbAppender.Query", "MongoDbAppender.Query\MongoDbAppender.Query.csproj", "{34DE25F1-B7A6-4714-B8A1-5C252F0B176E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbAppender.Query.Web", "MongoDbAppender.Query.Web\MongoDbAppender.Query.Web.csproj", "{7DED6202-C025-4634-8E89-74DB2C440159}"
+EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = MongoDbAppender.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -37,11 +38,18 @@ Global
 		{34DE25F1-B7A6-4714-B8A1-5C252F0B176E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34DE25F1-B7A6-4714-B8A1-5C252F0B176E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34DE25F1-B7A6-4714-B8A1-5C252F0B176E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DED6202-C025-4634-8E89-74DB2C440159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DED6202-C025-4634-8E89-74DB2C440159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DED6202-C025-4634-8E89-74DB2C440159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DED6202-C025-4634-8E89-74DB2C440159}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EB121FF2-8A78-46E9-B797-A851EA0FE635} = {E5FF50CC-8F0C-4C98-A20E-B1C7724BD036}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MongoDbAppender.vsmdi
 	EndGlobalSection
 EndGlobal
