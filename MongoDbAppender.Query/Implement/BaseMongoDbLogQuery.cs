@@ -46,7 +46,7 @@ namespace MongoDbAppender.Query.Implement
         {
             get
             {
-                return MongoClient.GetServer();
+                return this.MongoClient.GetServer();
             }
         }
 
