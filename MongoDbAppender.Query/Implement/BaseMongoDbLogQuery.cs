@@ -9,7 +9,7 @@ namespace MongoDbAppender.Query.Implement
     /// <summary>
     /// MongoDb log query base class
     /// </summary>
-    class BaseMongoDbLogQuery
+    public class BaseMongoDbLogQuery
     {
         /// <summary>
         /// Default database

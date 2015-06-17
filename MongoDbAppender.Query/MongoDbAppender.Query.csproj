@@ -58,6 +58,7 @@
     <Compile Include="Implement\BaseMongoDbLogQuery.cs" />
     <Compile Include="Implement\Detail.cs" />
     <Compile Include="Implement\Filter.cs" />
+    <Compile Include="Implement\Overview.cs" />
     <Compile Include="IOverview.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,7 +68,11 @@
       <Name>MongoDbAppender</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Config\query.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

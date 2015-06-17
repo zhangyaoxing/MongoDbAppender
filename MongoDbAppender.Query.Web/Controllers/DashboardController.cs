@@ -8,6 +8,7 @@ namespace MongoDbAppender.Query.Web.Controllers
 {
     public class DashboardController : Controller
     {
+        public IOverview Overview { get; set; }
         //
         // GET: /Dashboard/
 

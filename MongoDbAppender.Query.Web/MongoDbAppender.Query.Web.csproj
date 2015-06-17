@@ -7,8 +7,8 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7DED6202-C025-4634-8E89-74DB2C440159}</ProjectGuid>
-    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectGuid>{214CDCEF-147D-4B8B-BBC3-D52CF844194A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MongoDbAppender.Query.Web</RootNamespace>
@@ -41,24 +41,19 @@
   <ItemGroup>
     <Reference Include="Common.Logging">
       <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Common.Logging.Core">
       <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="Spring.Core">
       <HintPath>..\packages\Spring.Core.2.0.1\lib\net45\Spring.Core.dll</HintPath>
     </Reference>
     <Reference Include="Spring.Web">
       <HintPath>..\packages\Spring.Web.2.0.1\lib\net45\Spring.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Spring.Web.Mvc">
-      <HintPath>..\packages\Spring.Web.Mvc.2.0.0-M2\lib\net40\Spring.Web.Mvc.dll</HintPath>
+    <Reference Include="Spring.Web.Mvc5">
+      <HintPath>..\packages\Spring.Web.Mvc5.2.0.1\lib\net45\Spring.Web.Mvc5.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -78,105 +73,154 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Ajax\RepositoriesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Config\mvc.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\datepicker.css" />
-    <Content Include="Content\datepicker3.css" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ar.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.az.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.bg.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.bs.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ca.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.cs.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.cy.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.da.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.de.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.el.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.en-GB.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.es.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.et.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.eu.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.fa.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.fi.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.fo.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.fr-CH.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.fr.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.gl.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.he.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.hr.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.hu.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.hy.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.id.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.is.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.it-CH.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.it.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ja.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ka.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.kh.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.kk.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.kr.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.lt.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.lv.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.mk.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ms.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.nb.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.nl-BE.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.nl.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.no.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.pl.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.pt-BR.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.pt.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ro.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.rs-latin.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.rs.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.ru.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sk.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sl.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sq.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sr-latin.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sr.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sv.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.sw.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.th.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.tr.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.uk.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.vi.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.js" />
-    <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.js" />
-    <Content Include="Scripts\npm.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -184,19 +228,35 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MongoDbAppender.Query\MongoDbAppender.Query.csproj">
+      <Project>{34de25f1-b7a6-4714-b8a1-5c252f0b176e}</Project>
+      <Name>MongoDbAppender.Query</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MongoDbAppender\MongoDbAppender.csproj">
+      <Project>{51de12f3-72c6-4ee8-87eb-461fd2319abb}</Project>
+      <Name>MongoDbAppender</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MongoDbAppernderTest\MongoDbAppernderTest.csproj">
+      <Project>{eb121ff2-8a78-46e9-b797-a851ea0fe635}</Project>
+      <Name>MongoDbAppernderTest</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -214,7 +274,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>12361</DevelopmentServerPort>
+          <DevelopmentServerPort>4257</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:12361/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
@@ -226,7 +286,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
