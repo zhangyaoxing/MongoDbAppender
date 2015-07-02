@@ -7,7 +7,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Log4net.Appender.MongoDb;
-using MongoDB.Driver.Builders;
 using log4net.Config;
 
 namespace MongoDbAppernderTest
@@ -111,8 +110,9 @@ namespace MongoDbAppernderTest
             var spent = (DateTime.Now - start).Duration().TotalMilliseconds / 1000;
             //Console.WriteLine(spent);
             Console.WriteLine((double)THREAD_COUNT * LOG_COUNT / spent);
+            var builders = Builders<LogEntry>.Filter;
             var collection = GetLogCollection();
-            var count = collection.Count();
+            var count = collection.CountAsync(builders.All<LogEntry>);
             Assert.AreEqual(THREAD_COUNT * LOG_COUNT, count);
             var groups = collection.Group(
                 Query.Null,
@@ -144,17 +144,13 @@ namespace MongoDbAppernderTest
         private BsonDocument SearchMongoDbForLog(string level)
         {
             var collection = GetLogCollection();
-            var query = Query.EQ("level", new BsonString(level));
 
-            var docs = collection.FindAs<BsonDocument>(query)
-                .SetSortOrder(SortBy.Descending("timestamp"));
-            foreach (var doc in docs)
-            {
-                return doc;
-            }
+            var docs = collection.Find<LogEntry>(entry => entry.Level == level)
+                .SortByDescending<LogEntry, LogEntry>(entry => entry.Timestamp);
+            var doc = docs.FirstOrDefaultAsync<LogEntry, LogEntry>();
             return null;
         }
-        private MongoCollection GetLogCollection()
+        private IMongoCollection<LogEntry> GetLogCollection()
         {
             var path = AppDomain.CurrentDomain.BaseDirectory;
             var filePath = path + @"\config\logging.config";
@@ -177,9 +173,8 @@ namespace MongoDbAppernderTest
             }
             var url = new MongoUrl(connStr);
             var client = new MongoClient(url);
-            var server = client.GetServer();
-            var db = server.GetDatabase(dbNode == null ? (string.IsNullOrWhiteSpace(url.DatabaseName) ? MongoDbAppender.DEFAULT_DATABASE : url.DatabaseName) : dbNode.InnerText);
-            var collection = db.GetCollection("logs_" + collectionNameNode.InnerText);
+            var db = client.GetDatabase(dbNode == null ? (string.IsNullOrWhiteSpace(url.DatabaseName) ? MongoDbAppender.DEFAULT_DATABASE : url.DatabaseName) : dbNode.InnerText);
+            var collection = db.GetCollection<LogEntry>("logs_" + collectionNameNode.InnerText);
             return collection;
         }
     }

@@ -23,6 +23,7 @@ namespace MongoDbAppender.Query.Implement
                 //}
             }
 
+            this.Logger.Info(string.Format("{0} repositories found.", repoNames.Count));
             foreach(var repoName in repoNames)
             {
                 var repo = this.Database.GetCollection<LogEntry>(repoName);

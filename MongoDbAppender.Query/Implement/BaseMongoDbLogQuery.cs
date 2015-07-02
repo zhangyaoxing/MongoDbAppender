@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MongoDB.Driver;
+using Common.Logging;
 
 namespace MongoDbAppender.Query.Implement
 {
@@ -20,6 +21,11 @@ namespace MongoDbAppender.Query.Implement
         /// Default collection prefix
         /// </summary>
         public const string COLLECTION_PREFIX = "logs_";
+
+        /// <summary>
+        /// Logger
+        /// </summary>
+        public ILog Logger { get; set; }
 
         /// <summary>
         /// MongoUrl. (Filled by Spring)
@@ -40,37 +46,14 @@ namespace MongoDbAppender.Query.Implement
         }
 
         /// <summary>
-        /// Get MongoServer.
-        /// </summary>
-        public MongoServer MongoServer
-        {
-            get
-            {
-                return this.MongoClient.GetServer();
-            }
-        }
-
-        /// <summary>
         /// Get MongoDatabase
         /// </summary>
-        public MongoDatabase Database
+        public IMongoDatabase Database
         {
             get
             {
-                return this.MongoServer.GetDatabase(this.MongoUrl.DatabaseName);
+                return this.MongoClient.GetDatabase(this.MongoUrl.DatabaseName);
             }
-        }
-
-        /// <summary>
-        /// Get mongo collection by name.
-        /// </summary>
-        /// <param name="collectionName">collection name</param>
-        /// <typeparam name="T">Type of Log Entry</typeparam>
-        /// <returns>MongoDb集合</returns>
-        public MongoCollection GetMongoCollection(string collectionName)
-        {
-            var db = this.Database;
-            return db.GetCollection(collectionName);
         }
     }
 }

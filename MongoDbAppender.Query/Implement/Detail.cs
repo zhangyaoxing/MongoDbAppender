@@ -5,9 +5,7 @@ using System.Text;
 using MongoDbAppender.Query.Dto;
 using Log4net.Appender.MongoDb;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 using MongoDB.Bson;
-using MongoQuery = MongoDB.Driver.Builders.Query;
 
 namespace MongoDbAppender.Query.Implement
 {
@@ -39,7 +37,7 @@ namespace MongoDbAppender.Query.Implement
         public FilterResultDto FilterLogs(string reposName, IFilter filter)
         {
             var db = base.Database;
-            var collection = db.GetCollection(COLLECTION_PREFIX + reposName);
+            var collection = db.GetCollection<LogEntry>(COLLECTION_PREFIX + reposName);
             IMongoQuery condition = Filter2Conditions(filter);
 
             var count = collection.Count(condition);
@@ -52,8 +50,8 @@ namespace MongoDbAppender.Query.Implement
                 limit = skip + filter.PageSize;
             }
 
-            var all = collection.FindAs<LogEntry>(condition);
-            all.SetSortOrder(SortBy.Descending("timestamp"));
+            var all = collection.Find<LogEntry>(condition);
+            all.Sort(new SortDefinition<LogEntry>());
             all.Limit = filter.PageSize + filter.PageIndex * filter.PageSize;
             all.Skip = filter.PageIndex * filter.PageSize;
             var logs = all.ToList<LogEntry>();

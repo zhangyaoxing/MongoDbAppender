@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0"?>
 <log4net>
   <appender name="MongoDbAppender" type="Log4net.Appender.MongoDb.MongoDbAppender, Log4net.Appender.MongoDb">
-    <connectionStringName value="Logging"/>
-    <collectionName value="test" />
+    <connectionStringName value="LogDb"/>
+    <collectionName value="appenderWeb" />
     <bufferSize value="1" />
   </appender>
   <appender name="TraceAppender" type="log4net.Appender.TraceAppender">
@@ -11,7 +11,7 @@
     </layout>
   </appender>
   <root>
-    <level value="All" />
+    <level value="Info" />
     <appender-ref ref="MongoDbAppender" />
     <appender-ref ref="TraceAppender" />
   </root>

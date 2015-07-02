@@ -119,9 +119,8 @@ namespace Log4net.Appender.MongoDb
 
             try
             {
-                var server = this.client.GetServer();
-                var db = server.GetDatabase(this.dbName);
-                var collection = db.GetCollection(this.FullCollectionName);
+                var db = this.client.GetDatabase(this.dbName);
+                var collection = db.GetCollection<LogEntry>(this.FullCollectionName);
                 var logs = new List<LogEntry>();
                 foreach (var logEvent in events)
                 {
@@ -154,7 +153,7 @@ namespace Log4net.Appender.MongoDb
                     logs.Add(log);
                 }
 
-                collection.InsertBatch<LogEntry>(logs);
+                collection.InsertManyAsync(logs);
             }
             catch (Exception e)
             {

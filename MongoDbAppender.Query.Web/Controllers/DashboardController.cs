@@ -14,6 +14,7 @@ namespace MongoDbAppender.Query.Web.Controllers
 
         public ActionResult Index()
         {
+            this.Overview.GetLogRepositories();
             return View();
         }
     }
