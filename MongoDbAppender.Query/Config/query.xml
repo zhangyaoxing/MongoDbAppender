@@ -11,6 +11,9 @@
       </list>
     </property>
   </object>
+  <object name="MongoDbAppenderQueryLogger" type="Spring.Objects.Factory.Config.LogFactoryObject, Spring.Core">
+    <property name="logName" value="MongoDbAppender.Query.Logger"/>
+  </object>
   <object id="LogMongoUrl" type="MongoDB.Driver.MongoUrl, MongoDB.Driver">
     <constructor-arg name="url" value="${LogDb.connectionString}" />
   </object>
@@ -20,6 +23,7 @@
   <object id="BaseMongoDbLogQuery" abstract="true">
     <property name="MongoUrl" ref="LogMongoUrl" />
     <property name="MongoClient" ref="LogMongoClient" />
+    <property name="Logger" ref="MongoDbAppenderQueryLogger" />
   </object>
   <object id="Overview" type="MongoDbAppender.Query.Implement.Overview, MongoDbAppender.Query" parent="BaseMongoDbLogQuery">
   </object>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MongoDB.Driver;
+using Common.Logging;
 
 namespace MongoDbAppender.Query.Implement
 {
@@ -49,6 +50,11 @@ namespace MongoDbAppender.Query.Implement
                 return this.MongoClient.GetServer();
             }
         }
+
+        /// <summary>
+        /// Logger for query system
+        /// </summary>
+        public ILog Logger { get; set; }
 
         /// <summary>
         /// Get MongoDatabase

@@ -17,12 +17,13 @@ namespace MongoDbAppender.Query.Implement
 
             foreach(var collName in collNames)
             {
-                //if (collName.StartsWith(Log4net.Appender.MongoDb.MongoDbAppender.COLLECTION_PREFIX))
-                //{
+                if (collName.StartsWith(Log4net.Appender.MongoDb.MongoDbAppender.COLLECTION_PREFIX))
+                {
                     repoNames.Add(collName);
-                //}
+                }
             }
 
+            this.Logger.Info(string.Format("{0} repositories found.", repoNames.Count));
             foreach(var repoName in repoNames)
             {
                 var repo = this.Database.GetCollection<LogEntry>(repoName);
