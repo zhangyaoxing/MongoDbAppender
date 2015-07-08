@@ -23,7 +23,7 @@ namespace MongoDbAppender.Query.Implement
         /// </summary>
         /// <param name="reposName">Log repository name</param>
         /// <returns>stats</returns>
-        public StatisticsDto GetOverallStatistics(string reposName)
+        public IEnumerable<LevelCountDto> GetOverallStatistics(string reposName)
         {
             // TODO: 1000 should be configurable
             var result = this.Monitor.GetStatistics(reposName, TimeSpan.FromDays(1000));

@@ -17,7 +17,7 @@ namespace MongoDbAppender.Query
         /// </summary>
         /// <param name="reposName">Repository name</param>
         /// <returns>Statistics</returns>
-        StatisticsDto GetOverallStatistics(string reposName);
+        IEnumerable<LevelCountDto> GetOverallStatistics(string reposName);
 
         /// <summary>
         /// Filter logs with filter.

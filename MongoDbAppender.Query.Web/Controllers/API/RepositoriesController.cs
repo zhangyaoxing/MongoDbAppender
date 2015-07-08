@@ -20,7 +20,7 @@ namespace MongoDbAppender.Query.Web.Controllers.Ajax
         }
 
         // GET api/repositories/5
-        public string Get(int id)
+        public string Get(string id)
         {
             return "value";
         }

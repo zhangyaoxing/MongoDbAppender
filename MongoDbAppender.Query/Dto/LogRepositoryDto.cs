@@ -14,6 +14,7 @@ namespace MongoDbAppender.Query.Dto
         /// Name of repository.
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// Entry count.
         /// </summary>

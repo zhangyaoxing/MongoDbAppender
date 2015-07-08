@@ -14,10 +14,11 @@ namespace MongoDbAppender.Query.Implement
             var collNames = this.Database.GetCollectionNames();
             var repoNames = new List<string>();
             var repos = new List<LogRepositoryDto>();
+            var prefix = Log4net.Appender.MongoDb.MongoDbAppender.COLLECTION_PREFIX;
 
             foreach(var collName in collNames)
             {
-                if (collName.StartsWith(Log4net.Appender.MongoDb.MongoDbAppender.COLLECTION_PREFIX))
+                if (collName.StartsWith(prefix))
                 {
                     repoNames.Add(collName);
                 }
@@ -30,7 +31,7 @@ namespace MongoDbAppender.Query.Implement
                 var count = repo.Count();
                 repos.Add(new LogRepositoryDto()
                     {
-                        Name = repoName,
+                        Name = repoName.Replace(prefix, string.Empty),
                         EntryCount = count
                     });
             }

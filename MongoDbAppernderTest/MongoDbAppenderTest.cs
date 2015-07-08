@@ -157,7 +157,7 @@ namespace MongoDbAppernderTest
         private MongoCollection GetLogCollection()
         {
             var path = AppDomain.CurrentDomain.BaseDirectory;
-            var filePath = path + @"\config\logging.config";
+            var filePath = path + @"\config\log4net.xml";
 
             XmlDocument doc = new XmlDocument();
             doc.Load(filePath);

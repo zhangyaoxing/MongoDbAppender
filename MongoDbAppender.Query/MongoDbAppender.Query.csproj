@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\FilterResultDto.cs" />
+    <Compile Include="Dto\LevelCountDto.cs" />
     <Compile Include="Dto\LogLevel.cs" />
     <Compile Include="Dto\LogRepositoryDto.cs" />
     <Compile Include="Dto\StatisticsDto.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Implement\BaseMongoDbLogQuery.cs" />
     <Compile Include="Implement\Detail.cs" />
     <Compile Include="Implement\Filter.cs" />
+    <Compile Include="Implement\Monitor.cs" />
     <Compile Include="Implement\Overview.cs" />
     <Compile Include="IOverview.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

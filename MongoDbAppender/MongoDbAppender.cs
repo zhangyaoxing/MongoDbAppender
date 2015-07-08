@@ -18,7 +18,7 @@ namespace Log4net.Appender.MongoDb
         /// <summary>
         /// Default database.
         /// </summary>
-        public const string DEFAULT_DATABASE = "logs";
+        public const string DEFAULT_DATABASE = "Logs";
 
         /// <summary>
         /// database name

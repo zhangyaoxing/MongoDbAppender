@@ -2,3 +2,28 @@
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="row">
+    @for(var i = 0; i < ViewBag.Repositories.Count; i++) {
+        var repo = ViewBag.Repositories[i] as MongoDbAppender.Query.Dto.LogRepositoryDto;
+        var repoStat = ViewBag.RepoStats[i];
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    @repo.Name
+                    <span class="badge pull-right">
+                        @ViewBag.StatMinutes min
+                    </span>
+                </div>
+                <div class="list-group">
+                    @foreach (var stat in repoStat)
+                    {
+                        <a class="list-group-item">
+                            <span class="badge">@stat.Count</span>
+                            @stat.Level
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

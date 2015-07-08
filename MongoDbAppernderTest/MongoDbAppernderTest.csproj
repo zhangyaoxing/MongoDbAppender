@@ -80,6 +80,7 @@
   <ItemGroup>
     <Content Include="..\Shared\config\log4net.xml">
       <Link>config\log4net.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

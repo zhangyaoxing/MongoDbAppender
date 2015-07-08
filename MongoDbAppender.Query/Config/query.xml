@@ -28,4 +28,7 @@
   <object id="Overview" type="MongoDbAppender.Query.Implement.Overview, MongoDbAppender.Query" parent="BaseMongoDbLogQuery">
   </object>
   <object id="Detail" type="MongoDbAppender.Query.Implement.Detail, MongoDbAppender.Query" parent="BaseMongoDbLogQuery"></object>
+  <object id="Monitor" type="MongoDbAppender.Query.Implement.Monitor, MongoDbAppender.Query" parent="BaseMongoDbLogQuery">
+    <property name="Overview" ref="Overview" />
+  </object>
 </objects>
