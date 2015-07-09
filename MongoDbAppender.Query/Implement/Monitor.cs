@@ -48,6 +48,7 @@ namespace MongoDbAppender.Query.Implement
                 });
 
             // fill 0 to empty levels
+            long all = 0;
             foreach(LogLevel level in Enum.GetValues(typeof(LogLevel)))
             {
                 if (!result.ContainsKey(level))
@@ -58,7 +59,18 @@ namespace MongoDbAppender.Query.Implement
                         Count = 0
                     };
                 }
+                else
+                {
+                    all += result[level].Count;
+                }
             }
+
+            // fill level "all"
+            result[LogLevel.All] = new LevelCountDto()
+            {
+                Level = LogLevel.All.ToString(),
+                Count = all
+            };
 
             return result;
         }
