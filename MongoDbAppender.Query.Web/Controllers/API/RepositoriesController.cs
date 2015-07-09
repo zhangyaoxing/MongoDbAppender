@@ -19,8 +19,8 @@ namespace MongoDbAppender.Query.Web.Controllers.Ajax
             return repos;
         }
 
-        // GET api/repositories/5
-        public string Get(string id)
+        // GET api/repositories/name
+        public string Get(string name)
         {
             return "value";
         }
