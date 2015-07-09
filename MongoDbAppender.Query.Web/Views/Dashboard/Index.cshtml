@@ -15,11 +15,11 @@
                     </span>
                 </div>
                 <div class="list-group">
-                    @foreach (var stat in repoStat)
+                    @foreach (MongoDbAppender.Query.Dto.LogLevel level in Enum.GetValues(typeof(MongoDbAppender.Query.Dto.LogLevel)))
                     {
                         <a class="list-group-item">
-                            <span class="badge">@stat.Count</span>
-                            @stat.Level
+                            <span class="badge">@repoStat[level].Count</span>
+                            @level.ToString()
                         </a>
                     }
                 </div>

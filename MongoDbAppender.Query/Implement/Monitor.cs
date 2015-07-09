@@ -47,6 +47,19 @@ namespace MongoDbAppender.Query.Implement
                     return level;
                 });
 
+            // fill 0 to empty levels
+            foreach(LogLevel level in Enum.GetValues(typeof(LogLevel)))
+            {
+                if (!result.ContainsKey(level))
+                {
+                    result[level] = new LevelCountDto()
+                    {
+                        Level = level.ToString(),
+                        Count = 0
+                    };
+                }
+            }
+
             return result;
         }
     }
