@@ -336,7 +336,8 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\User\detail.js" />
+    <Content Include="Scripts\User\dashboard.js" />
+    <Content Include="Scripts\User\repository.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

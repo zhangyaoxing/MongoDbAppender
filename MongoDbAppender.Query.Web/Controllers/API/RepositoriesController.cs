@@ -24,10 +24,15 @@ namespace MongoDbAppender.Query.Web.Controllers.Ajax
         }
 
         // GET api/repositories/id
-        public IDictionary<LogLevel, long> Get(string id)
+        public dynamic Get(string id)
         {
             var stat = this.Monitor.GetStatistics(id, TimeSpan.FromMinutes(this.StatMinutes));
-            return stat;
+            var result = new
+            {
+                name = id,
+                stat = stat
+            };
+            return result;
         }
     }
 }

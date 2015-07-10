@@ -2,10 +2,10 @@
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row">
-    @for(var i = 0; i < ViewBag.Repositories.Count; i++) {
+<div class="row" id="repos">
+    @{ var repos = ViewBag.Repositories; }
+    @for(var i = 0; i < repos.Count; i++) {
         var repo = ViewBag.Repositories[i] as MongoDbAppender.Query.Dto.LogRepositoryDto;
-        var repoStat = ViewBag.RepoStats[i];
         <div class="col-md-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -14,16 +14,11 @@
                         @ViewBag.StatMinutes min
                     </span>
                 </div>
-                <div class="list-group">
-                    @foreach (MongoDbAppender.Query.Dto.LogLevel level in Enum.GetValues(typeof(MongoDbAppender.Query.Dto.LogLevel)))
-                    {
-                        <a class="list-group-item">
-                            <span class="badge">@repoStat[level]</span>
-                            @level.ToString()
-                        </a>
-                    }
-                </div>
             </div>
         </div>
+        <script type="text/javascript">
+            loadStat('@repo.Name', );
+        </script>
     }
 </div>
+@Html.Partial("Templates/_Stat")

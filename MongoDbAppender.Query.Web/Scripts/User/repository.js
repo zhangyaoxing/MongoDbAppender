@@ -1,18 +1,17 @@
-﻿function Detail(name, tmplId) {
+﻿function Repository(name) {
     this.URL = "/api/repositories/";
     this.name = name;
-    this.tmplId = tmplId;
 }
 
-Detail.prototype = {
-    refresh: function (callback) {
+Repository.prototype = {
+    load: function (callback) {
         $.ajax({
             url: this.URL + this.name
         }).done(function (data) {
             alert(data);
+            callback(html);
         }).fail(function () {
 
         })
-        callback(html);
     }
 };
