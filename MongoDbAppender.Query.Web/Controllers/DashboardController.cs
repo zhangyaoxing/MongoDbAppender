@@ -15,7 +15,7 @@ namespace MongoDbAppender.Query.Web.Controllers
         public ActionResult Index()
         {
             var repos = this.Overview.GetLogRepositories();
-            var repoStats = new List<IDictionary<LogLevel, LevelCountDto>>();
+            var repoStats = new List<IDictionary<LogLevel, long>>();
             foreach(var repo in repos)
             {
                 var stat = this.Monitor.GetStatistics(repo.Name, TimeSpan.FromMinutes(this.StatMinutes));

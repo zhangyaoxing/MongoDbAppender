@@ -5,7 +5,10 @@
     <property name="Detail" ref="Detail" />
     <property name="Monitor" ref="Monitor" />
   </object>
-  <object type="MongoDbAppender.Query.Web.Controllers.Ajax.RepositoriesController, MongoDbAppender.Query.Web" singleton="false" parent="BasePageController">
+  <object type="MongoDbAppender.Query.Web.Controllers.Ajax.RepositoriesController, MongoDbAppender.Query.Web" singleton="false">
+    <property name="Overview" ref="Overview" />
+    <property name="Monitor" ref="Monitor" />
+    <property name="StatMinutes" value="5" />
   </object>
   <object type="MongoDbAppender.Query.Web.Controllers.DashboardController, MongoDbAppender.Query.Web" singleton="false" parent="BasePageController">
     <property name="StatMinutes" value="5" />

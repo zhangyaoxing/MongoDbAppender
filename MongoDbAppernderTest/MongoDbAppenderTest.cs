@@ -9,6 +9,7 @@ using MongoDB.Driver;
 using Log4net.Appender.MongoDb;
 using MongoDB.Driver.Builders;
 using log4net.Config;
+using System.Diagnostics;
 
 namespace MongoDbAppernderTest
 {
@@ -95,10 +96,11 @@ namespace MongoDbAppernderTest
         [TestMethod()]
         public void MongoDbAppenderStressTest()
         {
+            var watch = new Stopwatch();
             InitTestDB();
             XmlConfigurator.Configure();
             this.sem = new Semaphore(0, THREAD_COUNT);
-            var start = DateTime.Now;
+            watch.Start();
             for (var i = 0; i < THREAD_COUNT; i++)
             {
                 Thread thread = new Thread(new ThreadStart(this.WritingThread));
@@ -108,9 +110,10 @@ namespace MongoDbAppernderTest
             {
                 this.sem.WaitOne();
             }
-            var spent = (DateTime.Now - start).Duration().TotalMilliseconds / 1000;
+            watch.Stop();
+            var spent = watch.Elapsed.TotalSeconds;
             //Console.WriteLine(spent);
-            Console.WriteLine((double)THREAD_COUNT * LOG_COUNT / spent);
+            Debug.WriteLine(string.Format("Log entries per second: {0}.", (double)THREAD_COUNT * LOG_COUNT / spent));
             var collection = GetLogCollection();
             var count = collection.Count();
             Assert.AreEqual(THREAD_COUNT * LOG_COUNT, count);

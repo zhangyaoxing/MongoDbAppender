@@ -8,6 +8,6 @@ namespace MongoDbAppender.Query
 {
     public interface IMonitor
     {
-        IDictionary<LogLevel, LevelCountDto> GetStatistics(string repoName, TimeSpan timeSpan);
+        IDictionary<LogLevel, long> GetStatistics(string repoName, TimeSpan timeSpan);
     }
 }

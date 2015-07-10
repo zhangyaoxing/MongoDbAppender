@@ -10,7 +10,11 @@ namespace MongoDbAppender.Query.Web.Controllers.Ajax
 {
     public class RepositoriesController : ApiController
     {
+        public int StatMinutes { get; set; }
+
         public IOverview Overview { get; set; }
+
+        public IMonitor Monitor { get; set; }
 
         // GET api/repositories
         public IEnumerable<LogRepositoryDto> Get()
@@ -19,10 +23,11 @@ namespace MongoDbAppender.Query.Web.Controllers.Ajax
             return repos;
         }
 
-        // GET api/repositories/name
-        public string Get(string name)
+        // GET api/repositories/id
+        public IDictionary<LogLevel, long> Get(string id)
         {
-            return "value";
+            var stat = this.Monitor.GetStatistics(id, TimeSpan.FromMinutes(this.StatMinutes));
+            return stat;
         }
     }
 }

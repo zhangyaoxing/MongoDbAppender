@@ -16,7 +16,7 @@ namespace MongoDbAppender.Query.Implement
     {
         public IOverview Overview { get; set; }
 
-        public IDictionary<LogLevel, LevelCountDto> GetStatistics(string repoName, TimeSpan timeSpan)
+        public IDictionary<LogLevel, long> GetStatistics(string repoName, TimeSpan timeSpan)
         {
             var fullRepoName = Appender.COLLECTION_PREFIX + repoName;
             var coll = this.Database.GetCollection<LogEntry>(fullRepoName);
@@ -35,17 +35,21 @@ namespace MongoDbAppender.Query.Implement
 
             var stats = from bson in bsonResult
                         select BsonSerializer.Deserialize<LevelCountDto>(bson);
-            var result = stats.ToDictionary<LevelCountDto, LogLevel>(
+            var result = stats.ToDictionary(
                 (item) => {
                     LogLevel level;
                     if (!Enum.TryParse<LogLevel>(item.Level, true, out level))
                     {
                         this.Logger.Error(string.Format("Unrecognizable level string: {0}.", item.Level));
+                        // defaults it to Error so that user can easily discover this problem.
                         level = LogLevel.Error;
                     }
 
                     return level;
-                });
+                },
+                (item) => {
+                    return item.Count;
+                }); ;
 
             // fill 0 to empty levels
             long all = 0;
@@ -53,24 +57,16 @@ namespace MongoDbAppender.Query.Implement
             {
                 if (!result.ContainsKey(level))
                 {
-                    result[level] = new LevelCountDto()
-                    {
-                        Level = level.ToString(),
-                        Count = 0
-                    };
+                    result[level] = 0;
                 }
                 else
                 {
-                    all += result[level].Count;
+                    all += result[level];
                 }
             }
 
             // fill level "all"
-            result[LogLevel.All] = new LevelCountDto()
-            {
-                Level = LogLevel.All.ToString(),
-                Count = all
-            };
+            result[LogLevel.All] = all;
 
             return result;
         }

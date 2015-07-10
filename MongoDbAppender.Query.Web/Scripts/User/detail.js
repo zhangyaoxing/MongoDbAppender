@@ -9,7 +9,7 @@ Detail.prototype = {
         $.ajax({
             url: this.URL + this.name
         }).done(function (data) {
-
+            alert(data);
         }).fail(function () {
 
         })
