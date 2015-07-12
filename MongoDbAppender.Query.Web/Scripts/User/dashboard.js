@@ -1,13 +1,12 @@
 ﻿function loadRepos(container, repos) {
+    var repoContainers = $(container).find(".repoContainer");
     $(repos).each(function (index, item) {
-        var repo = new Repository(item.name);
-        repo.update(container, $("#stat"));
+        var repoContainer = $(repoContainers[index]);
+        loadRepo(item.name, repoContainer);
     });
 }
 
-function loadStat(name, id) {
-    var repository = new Repository(name);
-    repository.load(function (data) {
-        var container = $("#" + id);
-    })
+function loadRepo(name, container) {
+    var repo = new Repository(name);
+    repo.update(container, $("#repo"));
 }

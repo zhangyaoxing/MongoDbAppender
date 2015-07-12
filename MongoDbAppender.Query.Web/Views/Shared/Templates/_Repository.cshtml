@@ -1,0 +1,38 @@
+﻿<script type="text/html" id="repo">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{name}}
+            <a class="glyphicon glyphicon-refresh" href="#refresh" onclick="loadRepo('{{name}}', $(this).parents('.repoContainer')); return false;"></a>
+        </div>
+        <div class="list-group">
+            <a class="list-group-item">
+                <span class="badge">{{stat.All}}</span>
+                All
+            </a>
+            <a class="list-group-item">
+                <span class="badge">{{stat.Trace}}</span>
+                Trace
+            </a>
+            <a class="list-group-item">
+                <span class="badge">{{stat.Info}}</span>
+                Info
+            </a>
+            <a class="list-group-item">
+                <span class="badge">{{stat.Debug}}</span>
+                Debug
+            </a>
+            <a class="list-group-item">
+                <span class="badge">{{stat.Warn}}</span>
+                Warn
+            </a>
+            <a class="list-group-item">
+                <span class="badge">{{stat.Error}}</span>
+                Error
+            </a>
+            <a class="list-group-item">
+                <span class="badge">{{stat.Fatal}}</span>
+                Fatal
+            </a>
+        </div>
+    </div>
+</script>

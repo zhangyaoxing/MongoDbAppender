@@ -11,7 +11,7 @@ namespace MongoDbAppender.Query.Implement
     {
         public IList<Dto.LogRepositoryDto> GetLogRepositories()
         {
-            var collNames = this.Database.GetCollectionNames();
+            var collNames = this.Database.GetCollectionNames().OrderBy(name => name);
             var repoNames = new List<string>();
             var repos = new List<LogRepositoryDto>();
             var prefix = Log4net.Appender.MongoDb.MongoDbAppender.COLLECTION_PREFIX;

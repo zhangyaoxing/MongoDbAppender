@@ -6,21 +6,15 @@
     @{ var repos = ViewBag.Repositories; }
     @for(var i = 0; i < repos.Count; i++) {
         var repo = ViewBag.Repositories[i] as MongoDbAppender.Query.Dto.LogRepositoryDto;
-        <div class="col-md-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    @repo.Name
-                    <span class="badge pull-right">
-                        @ViewBag.StatMinutes min
-                    </span>
-                </div>
-            </div>
+        <div class="col-md-3 repoContainer">
         </div>
     }
 </div>
 
 <script type="text/javascript">
-    var repos = JSON.parse('@Html.Raw(ViewBag.RepositoriesJson)');
-    @*loadStats('@repo.Name', );*@
+    $("document").ready(function() {
+        var repos = @(Html.Raw(ViewBag.RepositoryJson));
+        loadRepos($("#repos"), repos);
+    });
 </script>
-@Html.Partial("Templates/_Stat")
+@Html.Partial("Templates/_Repository")
