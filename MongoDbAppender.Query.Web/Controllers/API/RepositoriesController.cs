@@ -24,9 +24,14 @@ namespace MongoDbAppender.Query.Web.Controllers.Ajax
         }
 
         // GET api/repositories/id
-        public dynamic Get(string id)
+        public dynamic Get(string id, string statMins = "")
         {
-            var stat = this.Monitor.GetStatistics(id, TimeSpan.FromMinutes(this.StatMinutes));
+            int mins;
+            if (!int.TryParse(statMins, out mins))
+            {
+                mins = this.StatMinutes;
+            }
+            var stat = this.Monitor.GetStatistics(id, TimeSpan.FromMinutes(mins));
             var result = new
             {
                 name = id,

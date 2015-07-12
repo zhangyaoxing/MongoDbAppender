@@ -1,4 +1,6 @@
 ﻿using MongoDbAppender.Query.Dto;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +25,13 @@ namespace MongoDbAppender.Query.Web.Controllers
             //}
 
             ViewBag.Repositories = repos;
-            //ViewBag.RepoStats = repoStats;
+            ViewBag.RepositoryJson = JsonConvert.SerializeObject(
+                repos,
+                new JsonSerializerSettings()
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    Formatting = Formatting.None
+                });
             ViewBag.StatMinutes = this.StatMinutes;
             return View();
         }
