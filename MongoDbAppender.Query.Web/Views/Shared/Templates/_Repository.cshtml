@@ -2,34 +2,34 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             {{name}}
-            <a class="glyphicon glyphicon-refresh" href="#refresh" onclick="loadRepo('{{name}}', $(this).parents('.repoContainer')); return false;"></a>
+            <a class="glyphicon glyphicon-refresh pull-right" href="#refresh" onclick="loadRepo('{{name}}', $(this).parents('.repoContainer')); return false;"></a>
         </div>
         <div class="list-group">
-            <a class="list-group-item">
+            <a class="list-group-item" href="repositories/{{name}}?level=all">
                 <span class="badge">{{stat.All}}</span>
                 All
             </a>
-            <a class="list-group-item">
+            <a class="list-group-item" href="repositories/{{name}}?level=trace">
                 <span class="badge">{{stat.Trace}}</span>
                 Trace
             </a>
-            <a class="list-group-item">
+            <a class="list-group-item" href="repositories/{{name}}?level=info">
                 <span class="badge">{{stat.Info}}</span>
                 Info
             </a>
-            <a class="list-group-item">
+            <a class="list-group-item" href="repositories/{{name}}?level=debug">
                 <span class="badge">{{stat.Debug}}</span>
                 Debug
             </a>
-            <a class="list-group-item">
+            <a class="list-group-item" href="repositories/{{name}}?level=warn">
                 <span class="badge">{{stat.Warn}}</span>
                 Warn
             </a>
-            <a class="list-group-item">
+            <a class="list-group-item" href="repositories/{{name}}?level=error">
                 <span class="badge">{{stat.Error}}</span>
                 Error
             </a>
-            <a class="list-group-item">
+            <a class="list-group-item" href="repositories/{{name}}?level=fatal">
                 <span class="badge">{{stat.Fatal}}</span>
                 Fatal
             </a>
