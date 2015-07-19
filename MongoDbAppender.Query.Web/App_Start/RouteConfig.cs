@@ -16,7 +16,7 @@ namespace MongoDbAppender.Query.Web
             routes.MapRoute(
                 name: "Repository",
                 url: "repositories/{name}",
-                defaults: new { controller = "Repositories", action = "ViewDetail", name = UrlParameter.Optional }
+                defaults: new { controller = "Repositories", action = "Index", name = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "Default",

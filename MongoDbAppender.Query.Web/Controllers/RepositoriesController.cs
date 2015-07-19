@@ -13,9 +13,9 @@ namespace MongoDbAppender.Query.Web.Controllers
     {
         public int StatMinutes { get; set; }
 
-        public ActionResult ViewDetail(string name, string level, string filter)
+        public ActionResult Index(string name, string filter)
         {
-
+            ViewBag.Name = name;
 
             return View();
         }

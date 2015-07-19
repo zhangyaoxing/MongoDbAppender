@@ -17,7 +17,12 @@ namespace MongoDbAppender.Query.Web
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
+                name: "EntryApi",
+                routeTemplate: "api/repositories/{id}/entries",
+                defaults: new { controller = "Entries", id = RouteParameter.Optional }
+            );
+            config.Routes.MapHttpRoute(
+                name: "RepositoryApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );

@@ -1,16 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <objects xmlns="http://www.springframework.net" default-autowire="constructor">
-  <object id="BasePageController" abstract="true">
+  <object id="BasePageController" init-method="Init" abstract="true">
     <property name="Overview" ref="Overview" />
     <property name="Detail" ref="Detail" />
     <property name="Monitor" ref="Monitor" />
+    <property name="QueryConstants" ref="QueryConstants" />
   </object>
-  <object type="MongoDbAppender.Query.Web.Controllers.Ajax.RepositoriesController, MongoDbAppender.Query.Web" singleton="false">
+  <object id="BaseApiController" init-method="Init" abstract="true">
     <property name="Overview" ref="Overview" />
+    <property name="Detail" ref="Detail" />
     <property name="Monitor" ref="Monitor" />
+    <property name="QueryConstants" ref="QueryConstants" />
+  </object>
+  <object type="MongoDbAppender.Query.Web.Controllers.API.RepositoriesController, MongoDbAppender.Query.Web" parent="BaseApiController" singleton="false">
     <property name="StatMinutes" value="5" />
   </object>
   <object type="MongoDbAppender.Query.Web.Controllers.DashboardController, MongoDbAppender.Query.Web" singleton="false" parent="BasePageController">
     <property name="StatMinutes" value="5" />
+  </object>
+  <object type="MongoDbAppender.Query.Web.Controllers.RepositoriesController, MongoDbAppender.Query.Web" singleton="false" parent="BasePageController">
   </object>
 </objects>

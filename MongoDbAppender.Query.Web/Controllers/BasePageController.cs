@@ -14,9 +14,12 @@ namespace MongoDbAppender.Query.Web.Controllers
 
         public IMonitor Monitor { get; set; }
 
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        public IQueryConstants QueryConstants { get; set; }
+
+        public void Init()
         {
-            base.Initialize(requestContext);
+            var repos = this.Overview.GetLogRepositories();
+            ViewBag.Repositories = repos;
         }
 	}
 }

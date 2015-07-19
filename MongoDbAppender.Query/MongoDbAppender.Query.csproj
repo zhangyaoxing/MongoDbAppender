@@ -82,8 +82,10 @@
     <Compile Include="Implement\Filter.cs" />
     <Compile Include="Implement\Monitor.cs" />
     <Compile Include="Implement\Overview.cs" />
+    <Compile Include="Implement\QueryConstants.cs" />
     <Compile Include="IOverview.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IQueryConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MongoDbAppender\MongoDbAppender.csproj">

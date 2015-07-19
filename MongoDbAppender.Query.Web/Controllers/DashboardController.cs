@@ -15,8 +15,7 @@ namespace MongoDbAppender.Query.Web.Controllers
 
         public ActionResult Index()
         {
-            var repos = this.Overview.GetLogRepositories();
-            ViewBag.Repositories = repos;
+            var repos = ViewBag.Repositories;
             ViewBag.RepositoryJson = JsonConvert.SerializeObject(
                 repos,
                 new JsonSerializerSettings()

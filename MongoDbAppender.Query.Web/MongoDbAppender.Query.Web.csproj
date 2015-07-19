@@ -203,6 +203,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\EntriesController.cs" />
     <Compile Include="Controllers\API\RepositoriesController.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -354,10 +356,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\Templates\_Repository.cshtml" />
+    <Content Include="Views\Repositories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
