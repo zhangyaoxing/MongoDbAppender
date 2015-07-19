@@ -12,6 +12,8 @@ namespace MongoDbAppender.Query.Web.Controllers.API
         // GET api/repositories/id/entries
         public HttpResponseMessage Get(HttpRequestMessage request, string id)
         {
+            var filter = this.Detail.CreateFilter();
+
             return null;
         }
 

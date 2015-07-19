@@ -35,4 +35,13 @@
     <property name="DefaultStatMinutes" value="5" />
     <property name="DefaultLevel" value="All" />
   </object>
+  <object id="Filter" type="MongoDbAppender.Query.Implement.Filter, MongoDbAppender.Query" parent="BaseMongoDbLogQuery" scope="session">
+    <property name="BeginAt" expression="T(System.DateTime).Now.AddHours(-1)" />
+    <property name="EndAt" expression="T(System.DateTime).Now" />
+    <property name="MachineName" value="" />
+    <property name="PageIndex" value="0" />
+    <property name="PageSize" value="30" />
+    <property name="LogLevel" value="Error" />
+    <property name="Keyword" value="" />
+  </object>
 </objects>

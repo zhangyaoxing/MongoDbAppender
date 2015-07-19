@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Bson;
 using MongoQuery = MongoDB.Driver.Builders.Query;
+using Spring.Context.Support;
 
 namespace MongoDbAppender.Query.Implement
 {
@@ -74,7 +75,10 @@ namespace MongoDbAppender.Query.Implement
         /// <returns>filter</returns>
         public IFilter CreateFilter()
         {
-            return new Filter();
+            var context = ContextRegistry.GetContext();
+            var filter = context.GetObject<IFilter>("Filter");
+            
+            return filter;
         }
 
         /// <summary>
@@ -86,30 +90,58 @@ namespace MongoDbAppender.Query.Implement
         {
             if (filter.PageIndex < 0)
             {
-                throw new ArgumentException("PageIndex must be non-negative integer.", "PageIndex");
+                var ex = new ArgumentException("PageIndex must be non-negative integer.", "PageIndex");
+                this.Logger.Error("Wrong page index. Reset to default (0).", ex);
+                filter.PageIndex = 0;
             }
             if (filter.PageSize <= 0)
             {
-                throw new ArgumentException("PageSize must be positive integer.", "PageSize");
+                var ex = new ArgumentException("PageSize must be positive integer.", "PageSize");
+                this.Logger.Error("Wrong page size. Reset to default (30).", ex);
             }
 
             IList<IMongoQuery> conditions = new List<IMongoQuery>();
             IMongoQuery condition;
             if (filter.BeginAt != DateTime.MinValue)
             {
-                condition = MongoQuery.GTE("timestamp", new BsonDateTime(filter.BeginAt));
+                condition = Query<LogEntry>.GTE<DateTime>(entry => entry.Timestamp, filter.BeginAt);
                 conditions.Add(condition);
             }
+
             if (filter.EndAt != DateTime.MaxValue)
             {
-                condition = MongoQuery.LTE("timestamp", new BsonDateTime(filter.EndAt));
+                condition = Query<LogEntry>.LTE<DateTime>(entry => entry.Timestamp, filter.EndAt);
                 conditions.Add(condition);
             }
-            if (filter.LogLevel.Count<LogLevel>() > 0)
+
+            if (filter.LogLevels.Count<LogLevel>(level => !Enum.IsDefined(typeof(LogLevel), level)) > 0)
             {
-                condition = MongoQuery.EQ("level", new BsonString(filter.LogLevel.ToString().ToUpper()));
-                conditions.Add(condition);
+                var invalidLevel = filter.LogLevels.Where<LogLevel>(level => !Enum.IsDefined(typeof(LogLevel), level));
+                var ex = new ArgumentException("Invalid LogLevels.", "LogLevels");
+                this.Logger.Error(string.Format("Invalid log level: {0}.", string.Join<LogLevel>(", ", invalidLevel)), ex);
+                filter.LogLevels = filter.LogLevels.Except<LogLevel>(invalidLevel);
             }
+            var logLevelCount = filter.LogLevels.Count<LogLevel>();
+            if (logLevelCount == 0)
+            {
+                this.Logger.Warn("No LogLevels defined. Defaults to LogLevel.All.");
+                filter.LogLevels = new List<LogLevel>() { LogLevel.All };
+            }
+            if (filter.LogLevels.Contains<LogLevel>(LogLevel.All))
+            {
+                filter.LogLevels = new List<LogLevel>()
+                {
+                    LogLevel.Trace,
+                    LogLevel.Debug,
+                    LogLevel.Info,
+                    LogLevel.Warn,
+                    LogLevel.Error,
+                    LogLevel.Fatal
+                };
+            }
+            var levels = from level in filter.LogLevels
+                         select level.ToString().ToUpper();
+            condition = Query<LogEntry>.In<string>(entry => entry.Level, levels);
             if (!string.IsNullOrWhiteSpace(filter.MachineName))
             {
                 condition = MongoQuery.EQ("machineName", new BsonString(filter.MachineName));
