@@ -31,7 +31,7 @@
   <object id="Monitor" type="MongoDbAppender.Query.Implement.Monitor, MongoDbAppender.Query" parent="BaseMongoDbLogQuery">
     <property name="Overview" ref="Overview" />
   </object>
-  <object id="QueryConstants" type="MongoDbAppender.Query.Implement.QueryConstants, MongoDbAppender.Query" parent="BaseMongoDbLogQuery">
+  <object id="QueryConstants" type="MongoDbAppender.Query.Implement.QueryConstants, MongoDbAppender.Query">
     <property name="DefaultStatMinutes" value="5" />
     <property name="DefaultLevel" value="All" />
   </object>

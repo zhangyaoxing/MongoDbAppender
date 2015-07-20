@@ -6,7 +6,7 @@
     <property name="Monitor" ref="Monitor" />
     <property name="QueryConstants" ref="QueryConstants" />
   </object>
-  <object id="BaseApiController" init-method="Init" abstract="true">
+  <object id="BaseApiController" abstract="true">
     <property name="Overview" ref="Overview" />
     <property name="Detail" ref="Detail" />
     <property name="Monitor" ref="Monitor" />

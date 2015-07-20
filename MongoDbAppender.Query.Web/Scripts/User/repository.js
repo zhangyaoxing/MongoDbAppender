@@ -33,6 +33,7 @@ Repository.prototype = {
 
         // display a default view first.
         update({
+            appRoot: appRoot,
             name: this.name,
             stat: {
                 All: "loading...",
@@ -47,6 +48,7 @@ Repository.prototype = {
         
         if (this.state == AjaxState.Ready) {
             update({
+                appRoot: appRoot,
                 name: this.name,
                 stat: this.stat
             });
@@ -57,6 +59,7 @@ Repository.prototype = {
             }.bind(this));
         } else if (this.state == AjaxState.Fail) {
             update({
+                appRoot: appRoot,
                 name: this.name,
                 stat: {
                     All: "loading failed",
