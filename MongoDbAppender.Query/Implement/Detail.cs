@@ -102,6 +102,12 @@ namespace MongoDbAppender.Query.Implement
 
             IList<IMongoQuery> conditions = new List<IMongoQuery>();
             IMongoQuery condition;
+            if (!string.IsNullOrEmpty(filter.Keyword))
+            {
+                condition = MongoQuery.Text(filter.Keyword);
+                conditions.Add(condition);
+            }
+
             if (filter.BeginAt != DateTime.MinValue)
             {
                 condition = Query<LogEntry>.GTE<DateTime>(entry => entry.Timestamp, filter.BeginAt);
@@ -142,11 +148,14 @@ namespace MongoDbAppender.Query.Implement
             var levels = from level in filter.LogLevels
                          select level.ToString().ToUpper();
             condition = Query<LogEntry>.In<string>(entry => entry.Level, levels);
+            conditions.Add(condition);
+
             if (!string.IsNullOrWhiteSpace(filter.MachineName))
             {
                 condition = MongoQuery.EQ("machineName", new BsonString(filter.MachineName));
                 conditions.Add(condition);
             }
+
             condition = MongoQuery.Null;
             for (var i = 0; i < conditions.Count; i++)
             {

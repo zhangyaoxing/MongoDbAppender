@@ -12,5 +12,9 @@ namespace MongoDbAppender.Query.Implement
         public int DefaultStatMinutes { get; set; }
 
         public LogLevel DefaultLevel { get; set; }
+
+        public int DefaultPageSize { get; set; }
+
+        public string DateTimeFormat { get; set; }
     }
 }

@@ -9,9 +9,24 @@ namespace MongoDbAppender.Query
 {
     public interface IQueryConstants
     {
-
+        /// <summary>
+        /// Default minitues to stat
+        /// </summary>
         int DefaultStatMinutes { get; }
 
+        /// <summary>
+        /// Default log level to view
+        /// </summary>
         LogLevel DefaultLevel { get; }
+
+        /// <summary>
+        /// Default page size if not specified
+        /// </summary>
+        int DefaultPageSize { get; }
+
+        /// <summary>
+        /// DateTime format.
+        /// </summary>
+        string DateTimeFormat { get; }
     }
 }

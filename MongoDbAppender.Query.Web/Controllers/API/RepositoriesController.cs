@@ -11,8 +11,6 @@ namespace MongoDbAppender.Query.Web.Controllers.API
 {
     public class RepositoriesController : BaseApiController
     {
-        public int StatMinutes { get; set; }
-
         // GET api/repositories
         [ResponseType(typeof(IEnumerable<LogRepositoryDto>))]
         public HttpResponseMessage Get(HttpRequestMessage request)
@@ -27,7 +25,7 @@ namespace MongoDbAppender.Query.Web.Controllers.API
             int mins;
             if (!int.TryParse(statMins, out mins))
             {
-                mins = this.StatMinutes;
+                mins = this.QueryConstants.DefaultStatMinutes;
             }
             var stat = this.Monitor.GetStatistics(id, TimeSpan.FromMinutes(mins));;
             return request.CreateResponse(HttpStatusCode.OK, new

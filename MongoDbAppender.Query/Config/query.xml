@@ -34,14 +34,19 @@
   <object id="QueryConstants" type="MongoDbAppender.Query.Implement.QueryConstants, MongoDbAppender.Query">
     <property name="DefaultStatMinutes" value="5" />
     <property name="DefaultLevel" value="All" />
+    <property name="DefaultPageSize" value="30" />
   </object>
-  <object id="Filter" type="MongoDbAppender.Query.Implement.Filter, MongoDbAppender.Query" parent="BaseMongoDbLogQuery" scope="session">
+  <object id="Filter" type="MongoDbAppender.Query.Implement.Filter, MongoDbAppender.Query" singleton="false">
     <property name="BeginAt" expression="T(System.DateTime).Now.AddHours(-1)" />
     <property name="EndAt" expression="T(System.DateTime).Now" />
     <property name="MachineName" value="" />
     <property name="PageIndex" value="0" />
     <property name="PageSize" value="30" />
-    <property name="LogLevel" value="Error" />
+    <property name="LogLevels">
+      <list element-type="MongoDbAppender.Query.Dto.LogLevel">
+        <value>Error</value>
+      </list>
+    </property>
     <property name="Keyword" value="" />
   </object>
 </objects>
