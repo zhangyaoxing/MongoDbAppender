@@ -53,11 +53,11 @@ namespace MongoDbAppender.Query.Implement
                 limit = skip + filter.PageSize;
             }
 
-            var all = collection.FindAs<LogEntry>(condition);
-            all.SetSortOrder(SortBy.Descending("timestamp"));
-            all.Limit = filter.PageSize + filter.PageIndex * filter.PageSize;
-            all.Skip = filter.PageIndex * filter.PageSize;
-            var logs = all.ToList<LogEntry>();
+            var logs = collection.FindAs<LogEntry>(condition)
+                .SetSortOrder(SortBy<LogEntry>.Descending(entry => entry.Timestamp))
+                .SetLimit(filter.PageSize + filter.PageIndex * filter.PageSize)
+                .SetSkip(filter.PageIndex * filter.PageSize)
+                .ToList<LogEntry>();
 
             return new FilterResultDto()
             {

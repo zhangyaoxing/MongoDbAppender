@@ -1,4 +1,5 @@
 ﻿using MongoDbAppender.Query.Dto;
+using MongoDbAppender.Query.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +28,14 @@ namespace MongoDbAppender.Query.Web.Controllers.API
             {
                 mins = this.QueryConstants.DefaultStatMinutes;
             }
-            var stat = this.Monitor.GetStatistics(id, TimeSpan.FromMinutes(mins));;
-            return request.CreateResponse(HttpStatusCode.OK, new
+            var stat = this.Monitor.GetStatistics(id, TimeSpan.FromMinutes(mins));
+            var result = new RepositoryModel()
             {
-                name = id,
-                stat = stat
-            });
+                Name = id,
+                Stat = stat
+            };
+
+            return request.CreateResponse(HttpStatusCode.OK, result);
         }
     }
 }

@@ -12,12 +12,11 @@
     <property name="Monitor" ref="Monitor" />
     <property name="QueryConstants" ref="QueryConstants" />
   </object>
-  <object type="MongoDbAppender.Query.Web.Controllers.API.RepositoriesController, MongoDbAppender.Query.Web" parent="BaseApiController" singleton="false">
+  <object type="MongoDbAppender.Query.Web.Controllers.API.RepositoriesController, MongoDbAppender.Query.Web" singleton="false" parent="BaseApiController">
   </object>
-  <object type="MongoDbAppender.Query.Web.Controllers.API.EntriesController, MongoDbAppender.Query.Web" parent="BaseApiController" singleton="false">
+  <object type="MongoDbAppender.Query.Web.Controllers.API.EntriesController, MongoDbAppender.Query.Web" singleton="false" parent="BaseApiController">
   </object>
   <object type="MongoDbAppender.Query.Web.Controllers.DashboardController, MongoDbAppender.Query.Web" singleton="false" parent="BasePageController">
-    <property name="StatMinutes" value="5" />
   </object>
   <object type="MongoDbAppender.Query.Web.Controllers.RepositoriesController, MongoDbAppender.Query.Web" singleton="false" parent="BasePageController">
   </object>

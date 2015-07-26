@@ -6,13 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace MongoDbAppender.Query.Web.Controllers.API
 {
     public class EntriesController : BaseApiController
     {
-        // GET api/repositories/id/entries
-        public HttpResponseMessage Get(HttpRequestMessage request, 
+        //[ResponseType(typeof(FilterResultDto))]
+        public FilterResultDto Get(
             string id, 
             string level = "", 
             string beginAt = "", 
@@ -79,9 +80,9 @@ namespace MongoDbAppender.Query.Web.Controllers.API
             }
 
             var result = this.Detail.FilterLogs(id, filter);
-            var response = request.CreateResponse<FilterResultDto>(HttpStatusCode.OK, result);
+            //var response = request.CreateResponse<FilterResultDto>(HttpStatusCode.OK, result);
 
-            return response;
+            return result;
         }
 
         // POST api/entries

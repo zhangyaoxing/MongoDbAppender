@@ -11,8 +11,6 @@ namespace MongoDbAppender.Query.Web.Controllers
 {
     public class DashboardController : BasePageController
     {
-        public int StatMinutes { get; set; }
-
         public ActionResult Index()
         {
             var repos = ViewBag.Repositories;
@@ -23,7 +21,8 @@ namespace MongoDbAppender.Query.Web.Controllers
                     ContractResolver = new CamelCasePropertyNamesContractResolver(),
                     Formatting = Formatting.None
                 });
-            ViewBag.StatMinutes = this.StatMinutes;
+            // TODO: stat minutes should be customizable.
+            ViewBag.StatMinutes = this.QueryConstants.DefaultStatMinutes;
             return View();
         }
     }

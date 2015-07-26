@@ -41,7 +41,7 @@
     <property name="EndAt" expression="T(System.DateTime).Now" />
     <property name="MachineName" value="" />
     <property name="PageIndex" value="0" />
-    <property name="PageSize" value="30" />
+    <property name="PageSize" value="5" />
     <property name="LogLevels">
       <list element-type="MongoDbAppender.Query.Dto.LogLevel">
         <value>Error</value>
