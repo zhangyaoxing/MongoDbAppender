@@ -1,5 +1,5 @@
 ﻿function Repository(name, statMins) {
-    this.URL = "/api/repositories/";
+    this.URL = appRoot + "api/repositories/";
     this.name = name;
     if (statMins) {
         this.statMins = statMins;
@@ -80,6 +80,16 @@ Repository.prototype = {
         }
     }
 };
+
+function RepositoryDetail(level, beginAt, endAt, machineName, keyword, pageSize) {
+    this.URL = appRoot + "api/repositories/";
+}
+
+RepositoryDetail.prototype = {
+    update: function (container, templateObj) {
+
+    }
+}
 
 var AjaxState = {
     Init: "Init",

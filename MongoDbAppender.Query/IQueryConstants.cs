@@ -10,19 +10,24 @@ namespace MongoDbAppender.Query
     public interface IQueryConstants
     {
         /// <summary>
-        /// Default minitues to stat
+        /// Default minitues to stat.
         /// </summary>
         int DefaultStatMinutes { get; }
 
         /// <summary>
-        /// Default log level to view
+        /// Default log level to view.
         /// </summary>
         LogLevel DefaultLevel { get; }
 
         /// <summary>
-        /// Default page size if not specified
+        /// Default page size if not specified.
         /// </summary>
         int DefaultPageSize { get; }
+
+        /// <summary>
+        /// Max page size. Specified page size must be less than this value.
+        /// </summary>
+        int MaxPageSize { get; }
 
         /// <summary>
         /// DateTime format.

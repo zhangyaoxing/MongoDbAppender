@@ -368,6 +368,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\Templates\_Repository.cshtml" />
     <Content Include="Views\Repositories\Index.cshtml" />
+    <Content Include="Views\Shared\Templates\_RepositoryDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

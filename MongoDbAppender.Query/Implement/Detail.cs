@@ -91,13 +91,32 @@ namespace MongoDbAppender.Query.Implement
             if (filter.PageIndex < 0)
             {
                 var ex = new ArgumentException("PageIndex must be non-negative integer.", "PageIndex");
-                this.Logger.Error("Wrong page index. Reset to default (0).", ex);
+                this.Logger.Error("Wrong page index. Reset to default 0.", ex);
                 filter.PageIndex = 0;
             }
             if (filter.PageSize <= 0)
             {
                 var ex = new ArgumentException("PageSize must be positive integer.", "PageSize");
-                this.Logger.Error("Wrong page size. Reset to default (30).", ex);
+                this.Logger.Error(
+                    string.Format(
+                        "Wrong page size. Reset to default {0}.",
+                        this.QueryConstants.DefaultPageSize),
+                    ex);
+                filter.PageSize = this.QueryConstants.DefaultPageSize;
+            }
+            if (filter.PageSize > this.QueryConstants.MaxPageSize)
+            {
+                var ex = new ArgumentException(
+                    string.Format(
+                        "PageSize must be less than {0}.",
+                        this.QueryConstants.MaxPageSize), 
+                    "PageSize");
+                this.Logger.Error(
+                    string.Format(
+                        "Wrong page size. Reset to default {0}.",
+                        this.QueryConstants.DefaultPageSize),
+                    ex);
+                filter.PageSize = this.QueryConstants.DefaultPageSize;
             }
 
             IList<IMongoQuery> conditions = new List<IMongoQuery>();

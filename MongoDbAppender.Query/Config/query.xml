@@ -24,6 +24,7 @@
     <property name="MongoUrl" ref="LogMongoUrl" />
     <property name="MongoClient" ref="LogMongoClient" />
     <property name="Logger" ref="MongoDbAppenderQueryLogger" />
+    <property name="QueryConstants" ref="QueryConstants" />
   </object>
   <object id="Overview" type="MongoDbAppender.Query.Implement.Overview, MongoDbAppender.Query" parent="BaseMongoDbLogQuery">
   </object>
@@ -35,6 +36,7 @@
     <property name="DefaultStatMinutes" value="5" />
     <property name="DefaultLevel" value="All" />
     <property name="DefaultPageSize" value="30" />
+    <property name="MaxPageSize" value="200" />
   </object>
   <object id="Filter" type="MongoDbAppender.Query.Implement.Filter, MongoDbAppender.Query" singleton="false">
     <property name="BeginAt" expression="T(System.DateTime).Now.AddHours(-1)" />

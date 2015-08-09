@@ -23,6 +23,11 @@ namespace MongoDbAppender.Query.Implement
         public const string COLLECTION_PREFIX = "logs_";
 
         /// <summary>
+        /// Constants used in query
+        /// </summary>
+        public QueryConstants QueryConstants { get; set; }
+
+        /// <summary>
         /// MongoUrl. (Filled by Spring)
         /// </summary>
         public MongoUrl MongoUrl

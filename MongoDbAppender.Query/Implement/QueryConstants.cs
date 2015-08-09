@@ -15,6 +15,8 @@ namespace MongoDbAppender.Query.Implement
 
         public int DefaultPageSize { get; set; }
 
+        public int MaxPageSize { get; set; }
+
         public string DateTimeFormat { get; set; }
     }
 }
