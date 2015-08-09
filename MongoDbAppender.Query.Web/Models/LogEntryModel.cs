@@ -16,12 +16,12 @@ namespace MongoDbAppender.Query.Web.Models
         /// <summary>
         /// Time of generated.
         /// </summary>
-        public DateTime Timestamp { get; set; }
+        public string Timestamp { get; set; }
 
         /// <summary>
         /// Log level. Represents the log4net log level.
         /// </summary>
-        public LogLevel Level { get; set; }
+        public string Level { get; set; }
 
         /// <summary>
         /// Thread generates the entry

@@ -36,13 +36,13 @@ Repository.prototype = {
             appRoot: appRoot,
             name: this.name,
             stat: {
-                All: "loading...",
-                Trace: "loading...",
-                Debug: "loading...",
-                Info: "loading...",
-                Warn: "loading...",
-                Error: "loading...",
-                Fatal: "loading...",
+                all: "loading...",
+                trace: "loading...",
+                debug: "loading...",
+                info: "loading...",
+                warn: "loading...",
+                error: "loading...",
+                fatal: "loading...",
             }
         });
         
@@ -62,13 +62,13 @@ Repository.prototype = {
                 appRoot: appRoot,
                 name: this.name,
                 stat: {
-                    All: "loading failed",
-                    Trace: "loading failed",
-                    Debug: "loading failed",
-                    Info: "loading failed",
-                    Warn: "loading failed",
-                    Error: "loading failed",
-                    Fatal: "loading failed",
+                    all: "loading failed",
+                    trace: "loading failed",
+                    debug: "loading failed",
+                    info: "loading failed",
+                    warn: "loading failed",
+                    error: "loading failed",
+                    fatal: "loading failed",
                 }
             });
         }

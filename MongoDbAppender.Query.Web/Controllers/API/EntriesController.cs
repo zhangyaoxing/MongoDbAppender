@@ -1,4 +1,6 @@
-﻿using MongoDbAppender.Query.Dto;
+﻿using AutoMapper;
+using MongoDbAppender.Query.Dto;
+using MongoDbAppender.Query.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -12,8 +14,8 @@ namespace MongoDbAppender.Query.Web.Controllers.API
 {
     public class EntriesController : BaseApiController
     {
-        //[ResponseType(typeof(FilterResultDto))]
-        public FilterResultDto Get(
+        [ResponseType(typeof(FilterResultModel))]
+        public HttpResponseMessage Get(HttpRequestMessage request,
             string id, 
             string level = "", 
             string beginAt = "", 
@@ -80,9 +82,10 @@ namespace MongoDbAppender.Query.Web.Controllers.API
             }
 
             var result = this.Detail.FilterLogs(id, filter);
-            //var response = request.CreateResponse<FilterResultDto>(HttpStatusCode.OK, result);
+            var model = Mapper.Map<FilterResultModel>(result);
+            var response = request.CreateResponse<FilterResultModel>(HttpStatusCode.OK, model);
 
-            return result;
+            return response;
         }
 
         // POST api/entries

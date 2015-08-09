@@ -1,4 +1,5 @@
-﻿using MongoDbAppender.Query.Dto;
+﻿using AutoMapper;
+using MongoDbAppender.Query.Dto;
 using MongoDbAppender.Query.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,8 @@ namespace MongoDbAppender.Query.Web.Controllers.API
         public HttpResponseMessage Get(HttpRequestMessage request)
         {
             var repos = this.Overview.GetLogRepositories();
-            return request.CreateResponse <IEnumerable<LogRepositoryDto>>(HttpStatusCode.OK, repos);
+            var model = Mapper.Map<IList<RepositoryBasicModel>>(repos);
+            return request.CreateResponse <IEnumerable<RepositoryBasicModel>>(HttpStatusCode.OK, model);
         }
 
         // GET api/repositories/id
@@ -29,13 +31,13 @@ namespace MongoDbAppender.Query.Web.Controllers.API
                 mins = this.QueryConstants.DefaultStatMinutes;
             }
             var stat = this.Monitor.GetStatistics(id, TimeSpan.FromMinutes(mins));
-            var result = new RepositoryModel()
+            var model = new RepositoryModel()
             {
                 Name = id,
                 Stat = stat
             };
 
-            return request.CreateResponse(HttpStatusCode.OK, result);
+            return request.CreateResponse(HttpStatusCode.OK, model);
         }
     }
 }

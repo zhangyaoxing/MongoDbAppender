@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using MongoDbAppender.Query.Web.App_Start;
+using Newtonsoft.Json.Serialization;
 using Spring.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace MongoDbAppender.Query.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            MappingConfig.RegisterMappings();
         }
     }
 }
