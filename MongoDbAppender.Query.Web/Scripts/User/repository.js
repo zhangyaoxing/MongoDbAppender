@@ -5,7 +5,7 @@
         this.statMins = statMins;
     }
     this.state = AjaxState.Init;
-    this.refresh();
+    //this.refresh();
 }
 
 Repository.prototype = {
@@ -18,12 +18,14 @@ Repository.prototype = {
             that.name = data.name;
             that.stat = data.stat;
             that.state = AjaxState.Ready;
-            $(that).dequeue("update");
+            $(that).dequeue("update" + that.name);
         }).fail(function () {
             that.state = AjaxState.Fail;
         })
     },
     update: function (container, templateObj) {
+        //if (this.state == AjaxState.Init || this.state)
+        this.refresh();
         var update = function (data) {
             var template = templateObj.html();
             Mustache.parse(template);
@@ -36,13 +38,13 @@ Repository.prototype = {
             appRoot: appRoot,
             name: this.name,
             stat: {
-                all: "loading...",
-                trace: "loading...",
-                debug: "loading...",
-                info: "loading...",
-                warn: "loading...",
-                error: "loading...",
-                fatal: "loading...",
+                all: "...",
+                trace: "...",
+                debug: "...",
+                info: "...",
+                warn: "...",
+                error: "...",
+                fatal: "...",
             }
         });
         
@@ -53,8 +55,12 @@ Repository.prototype = {
                 stat: this.stat
             });
         } else if (this.state == AjaxState.Loading) {
-            $(this).queue("update", function (next) {
-                this.update(container, templateObj);
+            $(this).queue("update" + this.name, function (next) {
+                update({
+                    appRoot: appRoot,
+                    name: this.name,
+                    stat: this.stat
+                });
                 next();
             }.bind(this));
         } else if (this.state == AjaxState.Fail) {

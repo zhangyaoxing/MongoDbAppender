@@ -6,7 +6,16 @@
     });
 }
 
-function loadRepo(name, container) {
-    var repo = new Repository(name);
-    repo.update(container, $("#repo"));
-}
+var loadRepo = (function () {
+    var repositories = {};
+
+    return function (name, container) {
+        var repo = repositories[name];
+        if (!repo) {
+            var repo = new Repository(name);
+            repositories[name] = repo;
+        }
+
+        repo.update(container, $("#repo"));
+    }
+})();
