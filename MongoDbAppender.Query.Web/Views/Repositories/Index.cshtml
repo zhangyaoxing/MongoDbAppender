@@ -5,8 +5,11 @@
 <div class="row">
     <div class="col-md-3 repoContainer" id="left_panel">
     </div>
+    <div class="col-md-9" id="repos_detail">
+    </div>
 </div>
 @Html.Partial("Templates/_Repository")
+@Html.Partial("Templates/_RepositoryDetail")
 <script type="text/javascript">
     loadRepo('@ViewBag.Name', $("#left_panel"));
 </script>

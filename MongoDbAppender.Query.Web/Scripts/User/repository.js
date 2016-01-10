@@ -81,11 +81,33 @@ Repository.prototype = {
     }
 };
 
-function RepositoryDetail(level, beginAt, endAt, machineName, keyword, pageSize) {
-    this.URL = appRoot + "api/repositories/";
+function RepositoryDetail(name, filter) {
+    // filter: level, beginAt, endAt, machineName, keyword, pageSize
+    this.name = name;
+    var conditions = [];
+    for (key in filter) {
+        var value = filter[key];
+        if (value) {
+            conditions.push("key=" + value);
+        }
+    }
+    var query = conditions.join("&");
+    this.url = appRoot + "api/repositories/" + name + "/entries?" + query;
+    this.state = AjaxState.Init;
 }
 
 RepositoryDetail.prototype = {
+    refresh: function() {
+        var that = this;
+        this.state = AjaxState.Loading;
+        $.ajax({
+            url: this.url
+        }).done(function (data) {
+            $(that).dequeue("update" + that.name);
+        }).fail(function () {
+            that.state = AjaxState.Fail;
+        })
+    },
     update: function (container, templateObj) {
 
     }

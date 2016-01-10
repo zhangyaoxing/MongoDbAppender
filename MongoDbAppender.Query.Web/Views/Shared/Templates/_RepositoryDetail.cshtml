@@ -2,11 +2,14 @@
     <div class="panel panel-primary">
         <div class="panel-heading">{{loggerName}}: {{message}}</div>
         <div class="panel-body">
-            <h1>{{}}</h1>
-            <pre>{{stackTrace}}</pre>
+            <h1>{{exception.name}}</h1>
+            <p>{{exception.message}}</p>
+            <div class="well">
+                <pre>{{exception.stackTrace}}</pre>
+            </div>
         </div>
         <div class="panel-footer">
-            {{}}
+            Log from: {{machineName}}, {{timestamp}}
         </div>
     </div>
 </script>

@@ -1,38 +1,21 @@
-﻿<script type="text/html" id="repo">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            {{name}}
-            <a class="glyphicon glyphicon-refresh pull-right" href="#refresh" onclick="loadRepo('{{name}}', $(this).parents('.repoContainer')); return false;"></a>
+﻿@using LogLevel = MongoDbAppender.Query.Dto.LogLevel;
+    <script type="text/html" id="repo">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{name}}
+                <a class="glyphicon glyphicon-refresh pull-right" href="#refresh" onclick="loadRepo('{{name}}', $(this).parents('.repoContainer')); return false;"></a>
+            </div>
+            <div class="list-group">
+                @foreach (LogLevel logLevel in Enum.GetValues(typeof(LogLevel)))
+                {
+                    var levelInLower = logLevel.ToString().ToLower();
+                    var isActive = ViewBag.ActiveLevel != null && (LogLevel)ViewBag.ActiveLevel == logLevel;
+                    <a class="list-group-item @(isActive ? "active" : string.Empty)" href="{{appRoot}}repositories/{{name}}#level=@levelInLower">
+                        <span class="badge">{{stat.@levelInLower}}</span>
+                        @*// TODO: i18n*@
+                        @logLevel
+                    </a>
+                }
+            </div>
         </div>
-        <div class="list-group">
-            <a class="list-group-item" href="{{appRoot}}repositories/{{name}}?level=all">
-                <span class="badge">{{stat.all}}</span>
-                All
-            </a>
-            <a class="list-group-item" href="{{appRoot}}repositories/{{name}}?level=trace">
-                <span class="badge">{{stat.trace}}</span>
-                Trace
-            </a>
-            <a class="list-group-item" href="{{appRoot}}repositories/{{name}}?level=info">
-                <span class="badge">{{stat.info}}</span>
-                Info
-            </a>
-            <a class="list-group-item" href="{{appRoot}}repositories/{{name}}?level=debug">
-                <span class="badge">{{stat.debug}}</span>
-                Debug
-            </a>
-            <a class="list-group-item" href="{{appRoot}}repositories/{{name}}?level=warn">
-                <span class="badge">{{stat.warn}}</span>
-                Warn
-            </a>
-            <a class="list-group-item" href="{{appRoot}}repositories/{{name}}?level=error">
-                <span class="badge">{{stat.error}}</span>
-                Error
-            </a>
-            <a class="list-group-item" href="{{appRoot}}repositories/{{name}}?level=fatal">
-                <span class="badge">{{stat.fatal}}</span>
-                Fatal
-            </a>
-        </div>
-    </div>
-</script>
+    </script>

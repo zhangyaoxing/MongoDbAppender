@@ -13,8 +13,12 @@ namespace MongoDbAppender.Query.Web.Controllers
     {
         public int StatMinutes { get; set; }
 
-        public ActionResult Index(string name, string filter)
+        public ActionResult Index(string name, string level)
         {
+            var activeLevel = LogLevel.All;
+            Enum.TryParse<LogLevel>(level, true, out activeLevel);
+
+            ViewBag.ActiveLevel = activeLevel;
             ViewBag.Name = name;
 
             return View();
