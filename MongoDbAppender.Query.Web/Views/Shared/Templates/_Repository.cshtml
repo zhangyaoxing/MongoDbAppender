@@ -9,8 +9,7 @@
                 @foreach (LogLevel logLevel in Enum.GetValues(typeof(LogLevel)))
                 {
                     var levelInLower = logLevel.ToString().ToLower();
-                    var isActive = ViewBag.ActiveLevel != null && (LogLevel)ViewBag.ActiveLevel == logLevel;
-                    <a class="list-group-item @(isActive ? "active" : string.Empty)" href="{{appRoot}}repositories/{{name}}#level=@levelInLower">
+                    <a class="list-group-item {{#@logLevel.ToString()}}active{{/@logLevel.ToString()}}" href="{{appRoot}}repositories/{{name}}#level=@levelInLower">
                         <span class="badge">{{stat.@levelInLower}}</span>
                         @*// TODO: i18n*@
                         @logLevel

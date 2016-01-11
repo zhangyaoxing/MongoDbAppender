@@ -15,10 +15,6 @@ namespace MongoDbAppender.Query.Web.Controllers
 
         public ActionResult Index(string name, string level)
         {
-            var activeLevel = LogLevel.All;
-            Enum.TryParse<LogLevel>(level, true, out activeLevel);
-
-            ViewBag.ActiveLevel = activeLevel;
             ViewBag.Name = name;
 
             return View();

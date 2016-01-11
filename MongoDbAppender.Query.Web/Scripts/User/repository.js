@@ -1,10 +1,32 @@
 ﻿function Repository(name, statMins) {
+    var that = this;
     this.URL = appRoot + "api/repositories/";
     this.name = name;
     if (statMins) {
         this.statMins = statMins;
     }
     this.state = AjaxState.Init;
+    var detectActiveLevel = function () {
+        var levelStr = $.url(window.location.href).fparam('level');
+        var levelStr = levelStr ? levelStr.toLowerCase() : "";
+        var activeLevel = Level.All;
+        for (var level in Level) {
+            if (level.toLowerCase() == levelStr) {
+                activeLevel = level;
+                break;;
+            }
+        }
+        return activeLevel;
+    };
+    this.activeLevel = detectActiveLevel();
+    $(window).on("hashchange", function () {
+        // refresh panel when level changes.
+        var activeLevel = detectActiveLevel();
+        if (that.activeLevel != activeLevel) {
+            that.activeLevel = activeLevel;
+            that.update();
+        }
+    });
     //this.refresh();
 }
 
@@ -24,9 +46,19 @@ Repository.prototype = {
         })
     },
     update: function (container, templateObj) {
-        //if (this.state == AjaxState.Init || this.state)
+        container = container || this.container;
+        templateObj = templateObj || this.templateObj;
+        if (!this.container) {
+            this.container = container;
+        }
+        if (!this.templateObj) {
+            this.templateObj = templateObj;
+        }
         this.refresh();
         var update = function (data) {
+            data.appRoot = appRoot;
+            data.name = this.name;
+            data[this.activeLevel] = true;
             var template = templateObj.html();
             Mustache.parse(template);
             var html = Mustache.render(template, data);
@@ -35,8 +67,6 @@ Repository.prototype = {
 
         // display a default view first.
         update({
-            appRoot: appRoot,
-            name: this.name,
             stat: {
                 all: "...",
                 trace: "...",
@@ -50,23 +80,17 @@ Repository.prototype = {
         
         if (this.state == AjaxState.Ready) {
             update({
-                appRoot: appRoot,
-                name: this.name,
                 stat: this.stat
             });
         } else if (this.state == AjaxState.Loading) {
             $(this).queue("update" + this.name, function (next) {
                 update({
-                    appRoot: appRoot,
-                    name: this.name,
                     stat: this.stat
                 });
                 next();
             }.bind(this));
         } else if (this.state == AjaxState.Fail) {
             update({
-                appRoot: appRoot,
-                name: this.name,
                 stat: {
                     all: "loading failed",
                     trace: "loading failed",
@@ -118,4 +142,14 @@ var AjaxState = {
     Loading: "Loading",
     Ready: "Ready",
     Fail: "Fail"
+};
+
+var Level = {
+    All: "All",
+    Trace: "Trace",
+    Debug: "Debug",
+    Info: "Info",
+    Warn: "Warn",
+    Error: "Error",
+    Fatal: "Fatal"
 };
