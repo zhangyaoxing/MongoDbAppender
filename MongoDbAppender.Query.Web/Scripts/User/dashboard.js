@@ -12,10 +12,13 @@ var loadRepo = (function () {
     return function (name, container) {
         var repo = repositories[name];
         if (!repo) {
-            var repo = new Repository(name);
+            var repo = new Repository(name, {
+                template: $("#repo"),
+                container: container
+            });
             repositories[name] = repo;
         }
 
-        repo.update(container, $("#repo"));
+        repo.refresh();
     }
 })();

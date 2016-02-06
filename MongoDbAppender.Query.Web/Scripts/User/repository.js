@@ -1,109 +1,106 @@
-﻿function Repository(name, statMins) {
-    var that = this;
-    this.URL = appRoot + "api/repositories/";
-    this.name = name;
-    if (statMins) {
-        this.statMins = statMins;
-    }
-    this.state = AjaxState.Init;
-    var detectActiveLevel = function () {
-        var levelStr = $.url(window.location.href).fparam('level');
-        var levelStr = levelStr ? levelStr.toLowerCase() : "";
-        var activeLevel = Level.All;
-        for (var level in Level) {
-            if (level.toLowerCase() == levelStr) {
-                activeLevel = level;
-                break;;
-            }
-        }
-        return activeLevel;
-    };
-    this.activeLevel = detectActiveLevel();
-    $(window).on("hashchange", function () {
-        // refresh panel when level changes.
-        var activeLevel = detectActiveLevel();
-        if (that.activeLevel != activeLevel) {
-            that.activeLevel = activeLevel;
-            that.update();
-        }
-    });
-    //this.refresh();
-}
-
-Repository.prototype = {
-    refresh: function () {
-        var that = this;
-        this.state = AjaxState.Loading;
-        $.ajax({
-            url: this.URL + this.name + (this.statMins ? ("?statMins=" + this.statMins) : "")
-        }).done(function (data) {
-            that.name = data.name;
-            that.stat = data.stat;
-            that.state = AjaxState.Ready;
-            $(that).dequeue("update" + that.name);
-        }).fail(function () {
-            that.state = AjaxState.Fail;
-        })
-    },
-    update: function (container, templateObj) {
-        container = container || this.container;
-        templateObj = templateObj || this.templateObj;
-        if (!this.container) {
-            this.container = container;
-        }
-        if (!this.templateObj) {
-            this.templateObj = templateObj;
-        }
-        this.refresh();
-        var update = function (data) {
+﻿// define Repository class
+var Repository = (function () {
+    // private methods of Repository.
+    var private = {
+        update: function (data) {
             data.appRoot = appRoot;
             data.name = this.name;
             data[this.activeLevel] = true;
-            var template = templateObj.html();
-            Mustache.parse(template);
-            var html = Mustache.render(template, data);
-            container.html(html);
-        }.bind(this);
-
-        // display a default view first.
-        update({
-            stat: {
-                all: "...",
-                trace: "...",
-                debug: "...",
-                info: "...",
-                warn: "...",
-                error: "...",
-                fatal: "...",
-            }
-        });
-        
-        if (this.state == AjaxState.Ready) {
-            update({
-                stat: this.stat
-            });
-        } else if (this.state == AjaxState.Loading) {
-            $(this).queue("update" + this.name, function (next) {
-                update({
-                    stat: this.stat
-                });
-                next();
-            }.bind(this));
-        } else if (this.state == AjaxState.Fail) {
-            update({
-                stat: {
-                    all: "loading failed",
-                    trace: "loading failed",
-                    debug: "loading failed",
-                    info: "loading failed",
-                    warn: "loading failed",
-                    error: "loading failed",
-                    fatal: "loading failed",
+            Mustache.parse(this.template);
+            var html = Mustache.render(this.template, data);
+            this.container.html(html);
+        },
+        registerEvents: function () {
+            // detect hash change and refresh panel.
+            var detectActiveLevel = function () {
+                var levelStr = $.url(window.location.href).fparam('level');
+                var levelStr = levelStr ? levelStr.toLowerCase() : "";
+                var activeLevel = "";
+                for (var level in Level) {
+                    if (level.toLowerCase() == levelStr) {
+                        activeLevel = level;
+                        break;;
+                    }
+                }
+                return activeLevel;
+            };
+            this.activeLevel = detectActiveLevel();
+            var that = this;
+            $(window).on("hashchange", function () {
+                // listen to the hash change event.
+                // refresh panel when level changes.
+                var activeLevel = detectActiveLevel();
+                if (that.activeLevel != activeLevel) {
+                    that.activeLevel = activeLevel;
+                    that.refresh();
                 }
             });
+
+            // Ajax update event
+            $(this).on('beforeUpdate', function () {
+                // triggers before ajax request is sent
+                private.update.bind(this)({
+                    stat: {
+                        all: "...",
+                        trace: "...",
+                        debug: "...",
+                        info: "...",
+                        warn: "...",
+                        error: "...",
+                        fatal: "...",
+                    }
+                });
+            }.bind(this)).on('update', function (e, data) {
+                // triggers after ajax returned sucessfully.
+                private.update.bind(this)({
+                    stat: data.stat
+                });
+                $(this).trigger('afterUpdate');
+            }.bind(this)).on('updateFailed', function () {
+                // triggers when ajax failed.
+                private.update.bind(this)({
+                    stat: {
+                        all: "X",
+                        trace: "X",
+                        debug: "X",
+                        info: "X",
+                        warn: "X",
+                        error: "X",
+                        fatal: "X",
+                    }
+                });
+            }.bind(this));
         }
-    }
-};
+    };
+
+    var clazz = function (name, options) {
+        this.options = options || {};
+        this.name = name;
+        this.container = this.options.container || $(".repoContainer");
+        this.template = $(this.options.template || $("#repo")).html();
+        private.registerEvents.bind(this)();
+    };
+
+    clazz.prototype = {
+        refresh: function (filter) {
+            // TODO: resolve filter
+            var url = appRoot + "api/repositories/";
+            var that = this;
+            $(this).trigger('beforeUpdate');
+            $.ajax({
+                url: url + this.name + (this.statMins ? ("?statMins=" + this.statMins) : "")
+            }).done(function (data) {
+                that.stat = data.stat;
+                $(that).trigger('update', data);
+            }).fail(function () {
+                $(that).trigger('updateFailed');
+            })
+        }
+    };
+
+    return clazz;
+})();
+
 
 function RepositoryDetail(name, filter) {
     // filter: level, beginAt, endAt, machineName, keyword, pageSize
@@ -136,13 +133,6 @@ RepositoryDetail.prototype = {
 
     }
 }
-
-var AjaxState = {
-    Init: "Init",
-    Loading: "Loading",
-    Ready: "Ready",
-    Fail: "Fail"
-};
 
 var Level = {
     All: "All",
