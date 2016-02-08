@@ -1,6 +1,6 @@
 ﻿@using LogLevel = MongoDbAppender.Query.Dto.LogLevel;
     <script type="text/html" id="repo">
-        <div class="panel panel-default">
+        <div class="panel {{panelClass}}">
             <div class="panel-heading">
                 {{name}}
                 <a class="glyphicon glyphicon-refresh pull-right" href="#refresh" onclick="loadRepo('{{name}}', $(this).parents('.repoContainer')); return false;"></a>

@@ -11,5 +11,7 @@
 @Html.Partial("Templates/_Repository")
 @Html.Partial("Templates/_RepositoryDetail")
 <script type="text/javascript">
-    loadRepo('@ViewBag.Name', $("#left_panel"));
+    var name = '@ViewBag.Name';
+    loadRepo(name, $("#left_panel"));
+    loadRepoDetail(name, $("#repos_detail"));
 </script>

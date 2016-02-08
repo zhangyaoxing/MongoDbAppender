@@ -1,12 +1,37 @@
 ﻿// define Repository class
 var Repository = (function () {
+    var clazz = function (name, options) {
+        this.options = options || {};
+        this.name = name;
+        this.container = this.options.container || $(".repoContainer");
+        this.template = $(this.options.template || $("#repo")).html();
+        Mustache.parse(this.template);
+        private.registerEvents.bind(this)();
+    };
+
+    clazz.prototype = {
+        refresh: function (filter) {
+            // TODO: resolve filter
+            var url = appRoot + "api/repositories/";
+            var that = this;
+            $(this).trigger('beforeUpdate');
+            $.ajax({
+                url: url + this.name + (this.statMins ? ("?statMins=" + this.statMins) : "")
+            }).done(function (data) {
+                that.stat = data.stat;
+                $(that).trigger('update', data);
+            }).fail(function () {
+                $(that).trigger('updateFailed');
+            })
+        }
+    };
     // private methods of Repository.
     var private = {
         update: function (data) {
             data.appRoot = appRoot;
             data.name = this.name;
             data[this.activeLevel] = true;
-            Mustache.parse(this.template);
+            data.panelClass = levelToColor(this.activeLevel);
             var html = Mustache.render(this.template, data);
             this.container.html(html);
         },
@@ -73,24 +98,42 @@ var Repository = (function () {
         }
     };
 
+    return clazz;
+})();
+
+
+var RepositoryDetail = (function () {
     var clazz = function (name, options) {
-        this.options = options || {};
         this.name = name;
-        this.container = this.options.container || $(".repoContainer");
-        this.template = $(this.options.template || $("#repo")).html();
+        this.options = options || {};
+        this.container = this.options.container || $("#repos_detail");
+        this.detailTemplate = $(this.options.detailTemplate || $("#repoDetail")).html();
+        this.exceptionTemplate = $(this.options.exceptionTemplate || $("#exception")).html();
+        // compile template for future usage.
+        Mustache.parse(this.detailTemplate);
+        Mustache.parse(this.exceptionTemplate);
+
         private.registerEvents.bind(this)();
     };
 
     clazz.prototype = {
         refresh: function (filter) {
-            // TODO: resolve filter
-            var url = appRoot + "api/repositories/";
             var that = this;
+            // filter: level, from, to, machine_name, keyword, page_size, page_index
+            var conditions = [];
+            for (key in filter) {
+                var value = filter[key];
+                if (value) {
+                    conditions.push(key + "=" + value);
+                }
+            }
+            var query = conditions.join("&");
+            this.url = appRoot + "api/repositories/" + this.name + "/entries?" + query;
             $(this).trigger('beforeUpdate');
             $.ajax({
-                url: url + this.name + (this.statMins ? ("?statMins=" + this.statMins) : "")
+                url: this.url
             }).done(function (data) {
-                that.stat = data.stat;
+                that.data = data;
                 $(that).trigger('update', data);
             }).fail(function () {
                 $(that).trigger('updateFailed');
@@ -98,39 +141,43 @@ var Repository = (function () {
         }
     };
 
+    var private = {
+        update: function(data) {
+            data.appRoot = appRoot;
+            data.name = this.name;
+            data.panelClass = levelToColor(data.level);
+
+            var html = Mustache.render(this.detailTemplate, data, this.exceptionTemplate);
+            this.container.html(html);
+        },
+        registerEvents: function () {
+            $(this).on('beforeUpdate', function () {
+            }.bind(this)).on('update', function (e, data) {
+                private.update.bind(this)(data);
+            }.bind(this)).on('updateFailed', function () {
+            }.bind(this));
+        }
+    };
+
     return clazz;
 })();
 
-
-function RepositoryDetail(name, filter) {
-    // filter: level, beginAt, endAt, machineName, keyword, pageSize
-    this.name = name;
-    var conditions = [];
-    for (key in filter) {
-        var value = filter[key];
-        if (value) {
-            conditions.push("key=" + value);
-        }
-    }
-    var query = conditions.join("&");
-    this.url = appRoot + "api/repositories/" + name + "/entries?" + query;
-    this.state = AjaxState.Init;
-}
-
-RepositoryDetail.prototype = {
-    refresh: function() {
-        var that = this;
-        this.state = AjaxState.Loading;
-        $.ajax({
-            url: this.url
-        }).done(function (data) {
-            $(that).dequeue("update" + that.name);
-        }).fail(function () {
-            that.state = AjaxState.Fail;
-        })
-    },
-    update: function (container, templateObj) {
-
+function levelToColor(level) {
+    var levelUpper = (level || "ALL").toUpperCase();
+    switch (levelUpper) {
+        case "FATAL":
+            return 'panel-danger';
+        case "ERROR":
+            return 'panel-primary';
+        case "WARN":
+            return 'panel-warning';
+        case "INFO":
+            return 'panel-info';
+        case "DEBUG":
+            return 'panel-success';
+        case "TRACE":
+        case "ALL":
+            return 'panel-default';
     }
 }
 

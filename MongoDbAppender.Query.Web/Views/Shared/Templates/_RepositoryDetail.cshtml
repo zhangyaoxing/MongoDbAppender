@@ -1,15 +1,29 @@
-﻿<script type="text/html" id="repo">
-    <div class="panel panel-primary">
+﻿<script type="text/html" id="repoDetail">
+    {{#logEntries}}
+    <div class="panel {{panelClass}}">
         <div class="panel-heading">{{loggerName}}: {{message}}</div>
         <div class="panel-body">
-            <h1>{{exception.name}}</h1>
-            <p>{{exception.message}}</p>
-            <div class="well">
-                <pre>{{exception.stackTrace}}</pre>
-            </div>
+            {{#exception}}
+                <h2>{{exception.name}}</h2>
+                <p>{{exception.message}}</p>
+                <div class="well">
+                    <pre>{{exception.stackTrace}}</pre>
+                </div>
+                {{> exception}}
+            {{/exception}}
         </div>
         <div class="panel-footer">
             Log from: {{machineName}}, {{timestamp}}
         </div>
     </div>
+    {{/logEntries}}
+</script>
+
+<script type="text/html" id="exception">
+    <h2>{{innerException.name}}</h2>
+    <p>{{innerException.message}}</p>
+    <div class="well">
+        <pre>{{innerException.stackTrace}}</pre>
+    </div>
+    {{> exception}}
 </script>
