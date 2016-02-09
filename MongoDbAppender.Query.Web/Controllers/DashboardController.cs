@@ -23,6 +23,7 @@ namespace MongoDbAppender.Query.Web.Controllers
                 });
             // TODO: stat minutes should be customizable.
             ViewBag.StatMinutes = this.QueryConstants.DefaultStatMinutes;
+            throw new Exception();
             return View();
         }
     }

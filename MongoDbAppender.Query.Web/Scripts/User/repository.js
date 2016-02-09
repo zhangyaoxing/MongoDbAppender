@@ -145,7 +145,9 @@ var RepositoryDetail = (function () {
         update: function(data) {
             data.appRoot = appRoot;
             data.name = this.name;
-            data.panelClass = levelToColor(data.level);
+            $(data.logEntries).each(function (index, log) {
+                log.panelClass = levelToColor(log.level);
+            });
 
             var html = Mustache.render(this.detailTemplate, data, this.exceptionTemplate);
             this.container.html(html);

@@ -1,10 +1,12 @@
 ﻿<script type="text/html" id="repoDetail">
     {{#logEntries}}
     <div class="panel {{panelClass}}">
-        <div class="panel-heading">{{loggerName}}: {{message}}</div>
+        <div class="panel-heading">{{className}}.{{method}} (line {{lineNumber}})</div>
         <div class="panel-body">
+            {{loggerName}}: {{message}}
             {{#exception}}
-                <h2>{{exception.name}}</h2>
+                <hr />
+                <h3>{{exception.name}}</h3>
                 <p>{{exception.message}}</p>
                 <div class="well">
                     <pre>{{exception.stackTrace}}</pre>
@@ -13,7 +15,9 @@
             {{/exception}}
         </div>
         <div class="panel-footer">
-            Log from: {{machineName}}, {{timestamp}}
+            By <b>{{userName}} </b>
+            from <b>{{machineName}}</b>
+            at <b>{{timestamp}}</b>
         </div>
     </div>
     {{/logEntries}}

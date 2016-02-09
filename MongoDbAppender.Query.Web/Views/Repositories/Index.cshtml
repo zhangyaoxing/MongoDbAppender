@@ -2,6 +2,27 @@
     ViewBag.Title = ViewBag.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline">
+            <div class="col-md-12">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">From:</span>
+                    <input name="from" class="form-control datetimepicker" placeholder="from time" value="@DateTime.Now.AddMinutes(-(double)ViewBag.StatMinutes).ToString("yyyy/MM/dd hh:mm")" />
+                </div>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">To:</span>
+                    <input name="to" class="form-control datetimepicker" placeholder="to time" value="@DateTime.Now.ToString("yyyy/MM/dd hh:mm")" />
+                </div>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">Keyword:</span>
+                    <input name="keyword" class="form-control" placeholder="keyword" />
+                </div>
+                <button type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-filter"></span> filter</button>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-3 repoContainer" id="left_panel">
     </div>
@@ -14,4 +35,7 @@
     var name = '@ViewBag.Name';
     loadRepo(name, $("#left_panel"));
     loadRepoDetail(name, $("#repos_detail"));
+    $(".datetimepicker").datetimepicker({
+        format: 'YYYY/MM/DD HH:mm'
+    });
 </script>
