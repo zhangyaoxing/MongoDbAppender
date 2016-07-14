@@ -23,6 +23,7 @@ var loadRepo = (function () {
         }
 
         repo.refresh();
+        return repo;
     }
 })();
 
@@ -42,6 +43,7 @@ var loadRepoDetail = (function () {
             repositories[name] = repo;
         }
 
-        repo.refresh();
+        //repo.refresh();
+        return repo;
     };
 })();

@@ -19,6 +19,7 @@ var Repository = (function () {
                 url: url + this.name + (this.statMins ? ("?statMins=" + this.statMins) : "")
             }).done(function (data) {
                 that.stat = data.stat;
+                data.activeLevel = that.activeLevel;
                 $(that).trigger('update', data);
             }).fail(function () {
                 $(that).trigger('updateFailed');
@@ -44,8 +45,11 @@ var Repository = (function () {
                 for (var level in Level) {
                     if (level.toLowerCase() == levelStr) {
                         activeLevel = level;
-                        break;;
+                        break;
                     }
+                }
+                if (activeLevel == "") {
+                    activeLevel = Level.Warn;
                 }
                 return activeLevel;
             };

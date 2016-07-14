@@ -33,8 +33,15 @@
 @Html.Partial("Templates/_RepositoryDetail")
 <script type="text/javascript">
     var name = '@ViewBag.Name';
-    loadRepo(name, $("#left_panel"));
-    loadRepoDetail(name, $("#repos_detail"));
+    var repo = loadRepo(name, $("#left_panel"));
+    //var detail = loadRepoDetail(name, $("#repos_detail"));
+    $(repo).on("update", function (e, data) {
+        var detail = loadRepoDetail(name, $("#repos_detail"));
+        var filter = {
+            level: data.activeLevel
+        };
+        detail.refresh(filter);
+    });
     $(".datetimepicker").datetimepicker({
         format: 'YYYY/MM/DD HH:mm'
     });
