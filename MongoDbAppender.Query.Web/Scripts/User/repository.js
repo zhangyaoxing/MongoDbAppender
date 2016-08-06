@@ -155,6 +155,7 @@ var RepositoryDetail = (function () {
 
             var html = Mustache.render(this.detailTemplate, data, this.exceptionTemplate);
             this.container.html(html);
+            $("#repos_detail").find('[data-toggle="popover"]').popover();
         },
         registerEvents: function () {
             $(this).on('beforeUpdate', function () {

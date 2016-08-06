@@ -1,7 +1,12 @@
 ﻿<script type="text/html" id="repoDetail">
     {{#logEntries}}
     <div class="panel {{panelClass}}">
-        <div class="panel-heading">{{className}}.{{method}} (line {{lineNumber}})</div>
+        <div class="panel-heading">
+            {{className}}.{{method}} (line {{lineNumber}})
+            <a href="#" class="pull-right" onclick="return false;" data-container="body" data-toggle="popover" data-placement="top" data-content="{id: &quot;{{id}}&quot;}">
+                <span class="glyphicon glyphicon-th"></span>
+            </a>
+        </div>
         <div class="panel-body">
             {{loggerName}}: {{message}}
             {{#exception}}
