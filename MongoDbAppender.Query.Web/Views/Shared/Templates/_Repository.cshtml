@@ -4,6 +4,7 @@
             <div class="panel-heading">
                 {{name}}
                 <a class="glyphicon glyphicon-refresh pull-right" href="#refresh" onclick="loadRepo('{{name}}', $(this).parents('.repoContainer')); return false;"></a>
+                <a href="#" class="glyphicon glyphicon-cog pull-right"></a>
             </div>
             <div class="list-group">
                 @foreach (LogLevel logLevel in Enum.GetValues(typeof(LogLevel)))

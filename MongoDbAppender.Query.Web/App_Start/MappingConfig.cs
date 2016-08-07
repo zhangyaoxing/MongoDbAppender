@@ -25,6 +25,7 @@ namespace MongoDbAppender.Query.Web.App_Start
 
             Mapper.CreateMap<LogEntry, LogEntryModel>();
             Mapper.CreateMap<FilterResultDto, FilterResultModel>();
+            Mapper.CreateMap<ExceptionEntry, ExceptionModel>();
         }
     }
 }
